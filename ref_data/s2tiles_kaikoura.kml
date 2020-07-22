@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+<Document id="root_doc">
+<Folder><name>s2tiles_kaikoura</name>
+  <Placemark>
+	<name>59GPN</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <Polygon><outerBoundaryIs><LinearRing><coordinates>172.2159865731,-42.4457006262,0 173.5501910406,-42.4237743128,0 173.5912809544,-43.4115506149,0 172.2355996342,-43.4342432806,0 172.2159865731,-42.4457006262,0</coordinates></LinearRing></outerBoundaryIs></Polygon>
+  </Placemark>
+  <Placemark>
+	<name>59GPP</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <Polygon><outerBoundaryIs><LinearRing><coordinates>172.1989596317,-41.5450534441,0 173.5145174743,-41.5238047729,0 173.5537674855,-42.5117647877,0 172.2176936452,-42.5337583865,0 172.1989596317,-41.5450534441,0</coordinates></LinearRing></outerBoundaryIs></Polygon>
+  </Placemark>
+  <Placemark>
+	<name>59GQN</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <Polygon><outerBoundaryIs><LinearRing><coordinates>173.4306895838,-42.4263721229,0 174.7631041779,-42.390341466,0 174.8236405568,-43.3769503249,0 173.469858884,-43.4142391925,0 173.4306895838,-42.4263721229,0</coordinates></LinearRing></outerBoundaryIs></Polygon>
+  </Placemark>
+  <Placemark>
+	<name>59GQP</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <Polygon><outerBoundaryIs><LinearRing><coordinates>173.3966836473,-41.52632232,0 174.7105438302,-41.4914043206,0 174.7683734147,-42.4782294354,0 173.4340988503,-42.5143705673,0 173.3966836473,-41.52632232,0</coordinates></LinearRing></outerBoundaryIs></Polygon>
+  </Placemark>
+  <Placemark>
+	<name>59GQQ</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <Polygon><outerBoundaryIs><LinearRing><coordinates>173.3642082337,-40.6266494069,0 174.660345692,-40.5928134217,0 174.7156092957,-41.5798506742,0 173.3999608418,-41.6148767774,0 173.3642082337,-40.6266494069,0</coordinates></LinearRing></outerBoundaryIs></Polygon>
+  </Placemark>
+  <Placemark>
+	<name>60GTU</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <Polygon><outerBoundaryIs><LinearRing><coordinates>173.4059053046,-41.4951070527,0 174.7199670857,-41.5286954845,0 174.6843689071,-42.5168269107,0 173.3498806889,-42.4820618042,0 173.4059053046,-41.4951070527,0</coordinates></LinearRing></outerBoundaryIs></Polygon>
+  </Placemark>
+  <Placemark>
+	<name>60GTV</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+      <Polygon><outerBoundaryIs><LinearRing><coordinates>173.4545362985,-40.5964014683,0 174.75086522,-40.6289489934,0 174.7168490517,-41.6172572933,0 173.4009979599,-41.5835648642,0 173.4545362985,-40.5964014683,0</coordinates></LinearRing></outerBoundaryIs></Polygon>
+  </Placemark>
+</Folder>
+</Document></kml>

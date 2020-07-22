@@ -1,0 +1,42 @@
+Discussion
+Antonio Montuori ASI (co-convener) (16:22) Please Lorena the floor is yours
+Lorena Abad Z_GIS (author) (16:23) Thank you I will be happy to answer any questions
+Antonio Montuori ASI (co-convener) (16:23) Thank you for introduction and for the interesting work @Lorena. Does any have questions to the author?
+Antonio Montuori ASI (co-convener) (16:24) I have two curiosities: Which possible solutions to solve the topographic shadows issues? Could these mapping be used either for preventing hazards or post-event recovery operations, especially in case of populated regions?
+Sigrid-Roessner_GFZ-Potsdam (16:24) Were you able to capture the effects of the 2016 Kaikoura Earthquake forming a lot of dams?
+Lorena Abad Z_GIS (author) (16:25) THank you @Antonio, we tested several solutions including DEM products like distance to nearest channel network, with not so good results. Topographic correction did not work so good either, so unless we go for higher resolution we are still open for suggestions
+Thierry Oppikofer TERRANUM (16:26) @Lorena: did you assess the longevity and/or stability of the landslide dams?
+Lorena Abad Z_GIS (author) (16:26) We mainly aim for post event recovery and monitoring operations, since the dams stay in the terrain and a possible breach could generate a flood
+Antonio Montuori ASI (co-convener) (16:26) Many thanks @Lorena. Maybe Lidar or high-re SAR data could provide a contribution.
+Lorena Abad Z_GIS (author) (16:26) @Sigrid, we did find a lot of dams in formation, the inventories suggest around 200 but we also found other dams that were not on the list
+Lorena Abad Z_GIS (author) (16:27) @Thierry no, assessing the dam itself was challening to do at such a regional level, we focused on the lakes themselves
+Lorena Abad Z_GIS (author) (16:28) YEs @Antonio, we did try at least Sentinel 1 available on GEE but, the results were not so satisfactory, since the mountaineous terrain was still a limitation for detection
+Lorena Abad Z_GIS (author) (16:28) since we aim at automating the method and generalizing it for other areas we seek on working with data available on GEE data catalogue
+Antonio Montuori ASI (co-convener) (16:28) Thanks @Lorena for your work, presentation and the clarification provided. We invite participants to continue discussing with open public comments
+Thierry Oppikofer TERRANUM (16:29) @Lorena: FYI, we recently created an empirical relationship to assess the dam height based on landslide volume and other geomorphic characteristics for landslides in Norway. To assess the stability of dams we computed the DBI (dimensionless blockage index). Comparing our dataset with other published studies, we derived a function for likelihood of failure. This study should soon be available under NHESS discussions.
+
+
+D2015 | EGU2020-572
+
+Hello everyone, my name is Lorena Abad I work at the Z_GIS - Department of Geoinformatics of the University of Salzburg.
+ 
+My presentation introduces the method we have applied to detect and monitor landslide-dammed lakes using Sentinel-2 data on the Google Earth Engine. As a case study we focus on the 2016 Kaikoura earthquake in New Zealand. 
+The method consists on creating monthly mosaics for our study area, extracting a water mask from MNDWI thresholding and applying post minus pre event change detection to identify the newly formed lakes. 
+We analyzed 18 mosaics for the southern hemisphere summer months from 2016 to 2020. The results show a fairly high detection rate (72%), and allow us to closely monitor large dammed-lakes for lake area changes. In addition, the GEE computing capabilities allowed us to work on large study areas (9 600 km2) and perform time series analysis with more than 500 S2 scenes. Three example dams are shown on the displays and their lake area fluctuations will be further analyzed on an upcoming publication.
+
+If you have any questions, I'll be happy to answer! or if you prefer email me at lorenacristina.abadcrespo@sbg.ac.at
+
+Thank you for your questions and interest, hopefuly we can continue the discussion on the comments section of my display!
+
+MNDWI(Green-SWIR1)
+Mapping the landslide-dam itself is a challenge on the study area as spectral changes between landslide scars and surrounding areas is not evident (there are no highly vegetated surfaces), and can be confused with other features from the landscape.
+Several indices were tested, and also other sensors like S1, but the results did not improve greatly, mainly for the steep valleys.
+To automate the approach we applied a dynamic thresholding method that would select the MNDWI value for each monthly mosaic. Since the area we work on is highly mountaneous we added an additional threshold based on the distance to the channel network that would remove any water bodies not located on river beds. 
+To calculate the lake area, we computed connected components on GEE, where neighbouring pixels are clustered into a same component, allowing aggregated computations on its characteristics, moving from a pixel level approach to more of an object level (although not yet to the OBIA level).
+We found several limitations with the approach to successfully detect lakes on the whole study area, since finding a balance between removing topographic shadows and detecting dammed lakes inside steep valleys is still a challenge. 
+Also, having only one pre-event mosaic (december 2015) became problematic, since seasonal water changes were difficult to account for, and hence wetter periods showed a higher amount of false positives for newly formed lakes than months closer to the pre-event mosaic. Although Sentinel-2A was launched more than a year before the earthquake event, the imagery has not been completely ingested to the EE Data Catalog, or has known coregitration issues that would hamper the analysis if used. 
+To complement only one pre-event mosaic we used the JRC water mask, on a monthly basis, to remove areas with previously existing water. Of course the different resolutions make it harder to integrate the dataset on the whole workflow. 
+The JRC dataset does not cover the landslide dammed-lakes recently created.
+Our validation consisted on comparing the mapped lakes with manually delineated lakes on Google Earth Pro for the dates right after the earthquake, with a detection rate of 72%. Lakes smaller than 0.1 ha remain challenging to map, mainly if they have formed inside steep valleys. 
+However, the approach detected several dammed-lakes that were not part of the official dam inventory. 
+Also, monitoring large dammed-lakes on relatively flatter terrain was possible for the monthly scale we applied. For more intense monitoring, the timesteps can be finer reduced to even every 5 days for this area (in cloudless situations) with S2. 
