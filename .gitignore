@@ -12,7 +12,7 @@ Sentinel2-Pre/
 ref_data/nz-*
 *.zip
 *update*
-.Renviron
+.Renviron*
 niwa*
 *.sgrd
 *.sdat
@@ -21,3 +21,5 @@ channel*
 *vdcn.tiff
 *_cache
 manuscript/
+.httr-oauth
+*.Rproj
