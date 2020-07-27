@@ -11,7 +11,9 @@ The objective of the study is to automatically map the landslide-dammed lakes ca
 The figure below shows an overview of the methodology followed:
 ![](EGU2020/methods_landscape.png)
 
-The main analysis was performed on Google Earth Engine (GEE), and its corresponding code can be found [here](https://code.earthengine.google.com/cf8ae7f2029f2eabda0439bf7ecb0eb9).
+The main analysis was performed on Google Earth Engine (GEE), and its corresponding repository can be found [here](https://code.earthengine.google.com/?accept_repo=users/loreabad6/KaikouraDammedLakes_public). To access the code files, you will need to have a GEE account.
+
+If you would only like to see the main code, without a GEE account, please [click here](https://code.earthengine.google.com/354be2242944d820090df1eb4c68dbe9?noload=true)
 
 Some steps were done outside GEE including:
 
@@ -20,4 +22,6 @@ Some steps were done outside GEE including:
 
 Both resulting layers are then ingested into GEE. 
 
-The rest of the analysis is explained on the [main GEE code](https://code.earthengine.google.com/cf8ae7f2029f2eabda0439bf7ecb0eb9).
+A preview of how the GEE editor would look like with our results is shown below:
+
+![](EGU2020/GEE_layout.PNG)
