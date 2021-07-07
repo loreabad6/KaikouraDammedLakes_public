@@ -28,7 +28,7 @@ A preview of how the GEE editor would look like with our results is shown below:
 ![](EGU2020/GEE_layout.PNG)
 
 ### Acknowledgements:
-This research is supported by the Austrian Academy of Sciences (ÖAW) through the project RiCoLa (Detection and analysis of landslide-induced river course changes and lake formation).
+This research is supported by the Austrian Academy of Sciences (ÖAW) through the project RiCoLa (Detection and analysis of landslide-induced river course changes and lake formation) and by the New Zealand Ministry of Business, Innovation and Employment research program “Smarter Targeting of Erosion Control (STEC)” (Contract C09X1804).
 
 ### Further dissemination: 
 
