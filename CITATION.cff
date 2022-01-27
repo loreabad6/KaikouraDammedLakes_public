@@ -1,0 +1,52 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+authors:
+- family-names: "Abad"
+  given-names: "Lorena"
+  orcid: "https://orcid.org/0000-0003-0554-734X"
+- family-names: "Hölbling"
+  given-names: "Daniel"
+  orcid: "https://orcid.org/0000-0001-9282-8072"
+- family-names: "Spiekermann"
+  given-names: "Raphael"
+  orcid: "https://orcid.org/0000-0002-4772-9750"
+- family-names: "Prasicek"
+  given-names: "Günther"
+  orcid: "https://orcid.org/0000-0002-9332-1625"
+- family-names: "Dabiri"
+  given-names: "Zahra"
+  orcid: "https://orcid.org/0000-0003-1015-1657"
+- family-names: "Argentin"
+  given-names: "Anne-Laure"
+  orcid: "https://orcid.org/0000-0003-2310-6011"
+title: "Detecting landslide-dammed lakes on Sentinel-2 imagery and monitoring their spatio-temporal evolution following the Kaikōura earthquake in New Zealand"
+doi: 10.1016/j.scitotenv.2022.153335
+date-released: 2022-01-22
+url: "https://www.sciencedirect.com/science/article/pii/S0048969722004272"
+preferred-citation:
+  type: article
+  authors:
+  - family-names: "Abad"
+    given-names: "Lorena"
+    orcid: "https://orcid.org/0000-0003-0554-734X"
+  - family-names: "Hölbling"
+    given-names: "Daniel"
+    orcid: "https://orcid.org/0000-0001-9282-8072"
+  - family-names: "Spiekermann"
+    given-names: "Raphael"
+    orcid: "https://orcid.org/0000-0002-4772-9750"
+  - family-names: "Prasicek"
+    given-names: "Günther"
+    orcid: "https://orcid.org/0000-0002-9332-1625"
+  - family-names: "Dabiri"
+    given-names: "Zahra"
+    orcid: "https://orcid.org/0000-0003-1015-1657"
+  - family-names: "Argentin"
+    given-names: "Anne-Laure"
+    orcid: "https://orcid.org/0000-0003-2310-6011"
+    doi: "10.1016/j.scitotenv.2022.153335"
+  journal: "Science of The Total Environment"
+  title: "Detecting landslide-dammed lakes on Sentinel-2 imagery and monitoring their spatio-temporal evolution following the Kaikōura earthquake in New Zealand"
+  issue: 820C
+  volume: 153335
+  year: 2022
