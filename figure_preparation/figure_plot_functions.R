@@ -68,16 +68,20 @@ sa_plot = function(
       geom_stars(data = hillshade_effect, downsample = 15, alpha = 0.25) +
       scale_fill_gradientn(colours = grey.colors(100, start = 0, end=.95), guide='none', na.value = NA) 
   }
-  extra_scales = extra_feature %>% st_drop_geometry() %>% dplyr::distinct() 
-  extra_labels = extra_scales %>% pull(extra_legend) 
-  extra_shapes = extra_scales %>% pull(extra_shape) 
   aoiplot = aoiplot +
-    geom_sf(data = aoi, color = sa_color, fill = NA, size = 1) +
-    geom_sf(data = extra_feature, aes_string(color = extra_shape, shape = extra_shape, size = extra_shape)) +
-    scale_color_manual(name = '', labels = extra_labels, values = c('white','red')) +
-    scale_shape_manual(name = '', labels = extra_labels, values = c(20,18)) +
-    scale_size_manual(name = '', labels = extra_labels, values = c(0.5, 3)) +
-    geom_sf_text(data = extra_feature, aes(label = extra_label), nudge_y = 9000, size = extra_font_size, family = font_family, ) +#fontface = 'bold'
+    geom_sf(data = aoi, color = sa_color, fill = NA, size = 1) 
+  if(!is.null(extra_feature)){
+    extra_scales = extra_feature %>% st_drop_geometry() %>% dplyr::distinct() 
+    extra_labels = extra_scales %>% pull(extra_legend) 
+    extra_shapes = extra_scales %>% pull(extra_shape) 
+    aoiplot = aoiplot +
+      geom_sf(data = extra_feature, aes_string(color = extra_shape, shape = extra_shape, size = extra_shape)) +
+      scale_color_manual(name = '', labels = extra_labels, values = c('white','red')) +
+      scale_shape_manual(name = '', labels = extra_labels, values = c(20,18)) +
+      scale_size_manual(name = '', labels = extra_labels, values = c(0.5, 3)) +
+      geom_sf_text(data = extra_feature, aes(label = extra_label), nudge_y = 9000, size = extra_font_size, family = font_family, ) #fontface = 'bold'
+  }
+  aoiplot = aoiplot +
     scale_x_continuous(expand = c(0, 0)) +
     scale_y_continuous(expand = c(0, 0)) +
     coord_sf(crs = proj_crs, label_graticule = 'NW') +
@@ -114,27 +118,35 @@ sa_plot = function(
 #' Plot lake occurrence
 #' 
 #' @param dams `sf` object where landslide dams locations are stored, preferably projected
-#' @param landslide_dam_id Integere corresponding to the OBJECTID_1 column on the 
+#' @param landslide_dam_id Integer corresponding to the OBJECTID_1 column on the 
 #' landslide dam inventory
 #' @param nudge_x x shift of buffer center, defaults to 0 which then puts the landslide dam on the center
 #' @param nudge_y same as nudge_x but for the y coordinate
 #' @param zoom_buffer how large should the buffer around the selected dam be. The buffer is
 #' called for the projected dams. Defaults to 1000 m in a square representation. 
 #' @param position legend position for the plot, defaults to 'none'. 
+#' @param background should a sentinel2 RGB thumbnail be used as background? Defaults to FALSE
 #' Note: Will get rearranged by patchwork. 
+#' @param no_postevents how many post-event dates are processed? Used to calculate water percentage
 #' 
 #' @return map of selected landslide dam with the lake occurrence aggregated for the study periods.
  
 plot_lake_occurrence = function(
-  dams, landslide_dam_id, nudge_x = 0, nudge_y = 0, zoom_buffer = 1000, position = 'none', bg = F
+  dams, landslide_dam_id, nudge_x = 0, nudge_y = 0,
+  zoom_buffer = 1000, position = 'none', background = FALSE,
+  background_custom = NULL, bg_downsample = 0,
+  no_postevents = 19, scale_text_cex = 0.5, 
+  scale_height = unit(0.08, "cm"), scale_width_hint = 0.2,
+  legend_title_size = 9, legend_text_size = 9
   ) {
   dam_point = dams %>% dplyr::filter(OBJECTID_1 == landslide_dam_id) 
   dam_buffer = dam_point 
-  st_geometry(dam_buffer) = st_sfc(st_geometry(dam_buffer)[[1]] + sf::st_point(c(nudge_x, nudge_y)), crs = 2193)
+  st_geometry(dam_buffer) = st_sfc(st_geometry(dam_buffer)[[1]] +
+                                     sf::st_point(c(nudge_x, nudge_y)), crs = 2193)
   lake_zoom_buffer = dam_buffer %>% 
     st_buffer(zoom_buffer, endCapStyle = 'SQUARE')
   
-  if(bg){
+  if(background & is.null(background_custom)){
     lake_zoom_gee = ee$Geometry$Rectangle(
       coords = as.vector(st_bbox(st_transform(lake_zoom_buffer, 4326))),
       proj = "EPSG:4326",
@@ -151,25 +163,41 @@ plot_lake_occurrence = function(
     bg_tc = ee_as_thumbnail(
       bg$select(c("B4", "B3", "B2")), 
       region = lake_zoom_gee, dimensions = 2048, 
-      vizparams = list(min = 0, max = 6000, gamma = 1.5)
-    )
+      vizparams = list(min = 0, max = 6000, gamma = 2.5)
+    ) %>% st_set_crs(4326)
   }
   
-  lake_zoom = lakes[lake_zoom_buffer] %>%
-    st_as_stars() %>% 
+  lake_zoom = lakesproj[lake_zoom_buffer] %>%
+    st_as_stars() %>%
     st_set_dimensions(names = c('x','y','month'))
 
-  water_percentage = function(x) sum(x, na.rm = T)/17*100
+  water_percentage = function(x) sum(x, na.rm = T) / no_postevents * 100
   lake_zoom_sum = lake_zoom %>%
-    st_apply(c('x','y'), FUN = water_percentage) %>% 
-    na_if(0) 
-
+    st_apply(c('x','y'), FUN = water_percentage) %>%
+    na_if(0)
+    
   g = ggplot()
   
-  if(bg) {
-      g + layer_spatial(data = bg_tc, alpha = 0.85)
+  if(background & is.null(background_custom)) {
+      g = g + layer_spatial(data = bg_tc, alpha = 1)
   }
   
+  if(background & !is.null(background_custom)) {
+    bg_tc = background_custom[lake_zoom_buffer]
+    bg_tc = st_rgb(
+      st_as_stars(bg_tc)[,,,1:3],
+      dimension = 3,
+      maxColorValue = 250,
+      use_alpha = FALSE, 
+      probs = c(0.02, 0.98), #ignored when histogram equalizer stretch defined
+      stretch = TRUE)
+      
+    g = g + 
+      geom_stars(data = bg_tc, alpha = 0.85,
+                 show.legend = FALSE, downsample = bg_downsample) +
+      scale_fill_identity() +
+      ggnewscale::new_scale_fill()
+  }
   g +
     geom_stars(data = lake_zoom_sum) +
     scale_x_continuous(expand = c(0,0)) + scale_y_continuous(expand = c(0,0)) +
@@ -179,17 +207,21 @@ plot_lake_occurrence = function(
       guide = guide_colorbar(title.position = 'top')
     ) +
     geom_sf(data = dam_point, size = 2, shape = 18, aes(col = as.factor(Key_Dam))) +
-    scale_color_manual("", labels = c('GNS landslide dam', 'GNS landslide dam'), values = c('red', 'red')) +
+    scale_color_manual("", labels = c('GNS landslide dam', 'GNS landslide dam'),
+                       values = c('red', 'red')) +
     coord_sf(crs = 2193, label_graticule = 'NE') +
     annotation_scale(
-      location = "tl", width_hint = 0.2, style = 'bar', height = unit(0.08, "cm"),
-      text_cex = 0.5, line_width = 0.8, pad_y = unit(0.2, "cm"), pad_x = unit(0.2, "cm"),  
+      location = "tl", width_hint = scale_width_hint,
+      style = 'bar', height = scale_height,
+      text_cex = scale_text_cex, line_width = 0.5,
+      pad_y = unit(0.2, "cm"), pad_x = unit(0.2, "cm"),  
       text_pad = unit(0.1, "cm")
     ) +
     theme(
       legend.key.size = unit(0.5, "cm"),
       legend.key = element_blank(),
-      legend.title = element_text(size = 9),
+      legend.title = element_text(size = legend_title_size),
+      legend.text = element_text(size = legend_text_size),
       legend.position = position, 
       legend.background = element_blank(),
       panel.background = element_rect(fill = "grey95"), 
@@ -208,33 +240,38 @@ plot_lake_occurrence = function(
 #' @return time series plot with facets per lake organized in 1 column.
 #' Having a function to generate this, allows to create two separate plots when they are too
 #' large to fit on one single page.
-ts_plot = function(ts_data) {
-  ggplot(ts_data, aes(x = month, y = sumArea, color = sumArea)) +
-    geom_area(alpha = 0.5, color = NA, fill = 'grey80') + geom_point(size = 2) +
-    scale_x_yearmonth(date_breaks = '4 month',  date_labels = '%m-%Y') +
+ts_plot = function(ts_data, label_size = 2.5, 
+                   legend_title_size = 8,
+                   legend_text_size = 8, label = TRUE,
+                   date_breaks_months = '4 month') {
+  # Identify data gaps to plot dashed line in between
+  # From: https://stackoverflow.com/a/56763530/12118669
+  gaps = ts_data %>%
+    filter(is.na(lead(area)) & row_number() != n() |
+             is.na(lag(area)) & row_number() != 1) %>%
+    filter(!(is.na(area) & (lag(is.na(area)) | lead(is.na(area))))) %>% 
+    mutate(group = cumsum(row_number() %% 2))
+  
+  g = ggplot(ts_data, aes(x = month, y = area, color = area)) +
+    # geom_area(alpha = 0.5, color = NA, fill = 'grey80') + 
+    geom_line(data = gaps, color = 'grey70', aes(group = group), linetype = "dashed") +
+    # new_scale_color() +
+    geom_line(size = 1) +
+    geom_point(size = 2) +
+    scale_x_yearmonth(date_breaks = date_breaks_months,  date_labels = '%m-%Y') +
     scale_y_continuous(
       position = 'left', expand = expansion(mult = c(0, 0.1), add = c(0,0.55)), 
-      labels = function (x) sprintf("%.1f", x)
+      labels = function (x) sprintf("%.1f", x), limits = c(0,NA)
     ) +
     scico::scale_color_scico(
-      "Lake area (ha)", palette = 'batlow', direction = -1, limits = c(0,10.3), 
-      guide = guide_colorbar(title.position = 'top', title.theme = element_text(size = 8))
+      "Lake area (ha)", palette = 'batlow', direction = -1, limits = c(0,10.3)
+      # guide = guide_colorbar(title.position = 'top', title.theme = element_text(size = legend_title_size))
     ) +
-    geom_text(
-      aes(label = label), size = 2.5,
-      x = Inf,
-      y = Inf,
-      color = 'black', check_overlap = T, hjust = 1.1, vjust = 1.5
-    ) +
-    # geom_text(
-    #   aes(label = coords), size = 2.4,
-    #   x = yearmonth('2020-03-01'), y = Inf,
-    #   color = 'black', check_overlap = T, hjust = 1, vjust = 3.75
-    # ) +
     xlab('') + ylab('Lake area (ha)') +
     facet_wrap(~label, ncol = 1, scales = 'free_y', strip.position = 'left') +
     theme(
-      legend.title = element_text(size = 8),
+      legend.title = element_text(size = legend_title_size),
+      legend.text = element_text(size = legend_text_size),
       legend.position = 'right', axis.title.x = element_blank(),
       axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5), 
       strip.background = element_blank(),
@@ -242,9 +279,20 @@ ts_plot = function(ts_data) {
       # strip.background = element_rect(fill = 'grey95', color = 'grey50'),
       axis.ticks = element_line(color = 'grey50', size = 0.3),
       panel.background = element_rect(fill = 'white'),
-      panel.grid = element_line(color = 'grey85', linetype = 'dotted', size = 0.25),
+      panel.grid.minor = element_blank(),
+      panel.grid.major = element_line(color = 'grey90', size = 0.2),
       panel.border = element_rect(color = 'grey50', fill = 'transparent')
     )
+  
+  if(label) {
+    g +
+      geom_text(
+        aes(label = label), size = label_size,
+        x = Inf,
+        y = Inf,
+        color = 'black', check_overlap = T, hjust = 1.1, vjust = 1.5
+      ) 
+  } else g
 } 
 
 #' Build the time series plot combined with lake occurrence plot
@@ -255,14 +303,16 @@ ts_plot = function(ts_data) {
 #' matched with the lake occurrence plot to its right. The legends are combined on the 
 #' top of the plot.
 
-plot_build = function(patch_construct) {
+plot_build = function(patch_construct, legend_title_size = 8, 
+                      legend_text_size = 8) {
   (guide_area() / (patch_construct + plot_layout(widths = c(0.65,0.35)))) +
     plot_layout(guides = 'collect', height = c(0.05,0.95)) & 
     theme(
       legend.direction = 'horizontal',
-      legend.title = element_text(size = 8),
+      legend.title = element_text(size = legend_title_size),
       legend.title.align = 0.5, legend.box = 'horizontal',
-      legend.text = element_text(size = 8), legend.key.height = unit(2.5, 'mm')
+      legend.text = element_text(size = legend_text_size), 
+      legend.key.height = unit(2.5, 'mm')
       # legend.position = 'top'
     )
 }
@@ -281,7 +331,7 @@ plot_build = function(patch_construct) {
 plot_lake_detection = function(landslide_dam_id, zoom_buffer = 1000, downsample = 5) {
   dam_point = dams %>% dplyr::filter(OBJECTID_1 == landslide_dam_id) %>% 
     mutate(
-      coord_x = paste(gsub(' ', '°', 
+      coord_x = paste(gsub(' ', '\u00B0', 
                            measurements::conv_unit(
                              round(st_coordinates(st_transform(geometry, 4326))[,1], 2),
                              from = 'dec_deg', 
@@ -289,7 +339,7 @@ plot_lake_detection = function(landslide_dam_id, zoom_buffer = 1000, downsample 
                            )), 'E'),
       coord_y = paste(
         gsub('-','',
-             gsub(' ', '°', 
+             gsub(' ', '\u00B0', 
                   measurements::conv_unit(
                     round(st_coordinates(st_transform(geometry, 4326))[,2], 2),
                     from = 'dec_deg', 
@@ -321,21 +371,21 @@ plot_lake_detection = function(landslide_dam_id, zoom_buffer = 1000, downsample 
     bg$select(c("B4", "B3", "B2")), 
     region = lake_zoom_gee, dimensions = 2048, 
     vizparams = list(min = 0, max = 6000, gamma = 1.2)
-  ) #%>% st_transform(crs = st_crs(bg_crs))
+  ) %>% st_set_crs(4326)
   bg_fc = ee_as_thumbnail(
     bg$select(c("B8", "B4", "B3")), 
     region = lake_zoom_gee, dimensions = 2048, 
     vizparams = list(min = 0, max = 6000, gamma = 1.2)
-  ) #%>% st_transform(crs = st_crs(bg_crs))
+  ) %>% st_set_crs(4326)
   bg_ix = ee_as_thumbnail(
     mndwi, 
     region = lake_zoom_gee, dimensions = 2048,
     vizparams = list(min = -1, max = 1)
-  ) #%>% st_transform(crs = st_crs(bg_crs))
-  lake_dec2016 = lakes[,,,2][lake_zoom_buffer] %>%
+  ) %>% st_set_crs(4326)
+  lake_dec2016 = lakes[,,,4][st_transform(lake_zoom_buffer, 4326)] %>%
     st_as_stars() %>% 
     st_as_sf(as_points = F, merge = F, na.rm = T) %>% 
-    filter(V1 == 1) %>% 
+    filter(lake201612 == 1) %>% 
     st_union() %>% 
     st_transform(crs = st_crs(bg_tc))
   
@@ -348,7 +398,8 @@ plot_lake_detection = function(landslide_dam_id, zoom_buffer = 1000, downsample 
   plot(bg_tc, rgb = 1:3, main = NA, key.pos = NULL, reset = F) 
   plot(lake_dec2016, border = NA, col = rgb(0, 255, 255, alpha = 100, maxColorValue = 255),  reset = F, add = T)
   plot(dam_points, cex = 1.75, col = 'red', pch = 20, add = T)
-  plot(bg_fc, rgb = 1:3, main = paste(lake_zoom_buffer$Formal_Nam, lake_zoom_buffer$coords, sep = ": "), adj = 0.5, reset = F)
+  plot(bg_tc, rgb = 1:3, main = NA, key.pos = NULL, reset = F) 
+  plot(bg_fc, rgb = 1:3, main = paste(lake_zoom_buffer$Formal_Nam, lake_zoom_buffer$coords, sep = ": "), adj = 0.5, reset = F, add = TRUE)
   plot(bg_tc, rgb = 1:3, main = NA, key.pos = NULL, reset = F) 
   plot(bg_ix, col = scico::scico(n = 20, begin = 0.1, end = 0.9, direction = -1, palette = 'nuuk'), 
        main = NA, zlim = c(-0.4,0.4), key.pos = NULL, reset = F, add = T)
@@ -365,10 +416,10 @@ plot_lake_detection = function(landslide_dam_id, zoom_buffer = 1000, downsample 
 #' @return `stars` object with assigned TP, TN, FP, FN values for each pixel to then visually inspect the results
 
 create_pixelwise_confusion_matrix = function(subset){
-  lakes = read_stars('results/mapping_results-0000000000-0000000000.tif', proxy = T)
+  lakes = lakesproj
   val_areas = st_read('validation/validation_areas.geojson', quiet = T) %>% 
     st_transform(crs = st_crs(lakes)) 
-  lakes = lakes[,,,c(2,9,13)][val_areas %>% filter(id == subset)] %>% 
+  lakes = lakes[,,,c(4,12,15)][val_areas %>% filter(id == subset)] %>% 
     st_as_stars() %>% 
     st_set_dimensions(names = c('x','y','month')) %>% 
     st_set_dimensions(which = 'month', values = c('pred_dec_16','pred_mar_18','pred_jan_19'))
@@ -386,7 +437,7 @@ create_pixelwise_confusion_matrix = function(subset){
   ) %>% st_transform(crs = st_crs(lakes)) %>% st_join(val_areas, left = F)
   
   lakes_skeleton = lakes[,,,1, drop = T] %>% 
-    dplyr::select(results = mapping_results.0000000000.0000000000.tif) %>%
+    dplyr::select(results = `mapping_results_update.epsg2193.tif`) %>%
     mutate(results = ifelse(results == 1, 0, results))
   val_2016 = val %>% 
     filter(id.y == subset, stringr::str_detect(year, '2016')) %>% 
@@ -441,7 +492,7 @@ create_pixelwise_confusion_matrix = function(subset){
         )
       )
       )) %>% dplyr::select(starts_with('cm_')) %>% merge() %>% 
-    st_set_dimensions(which = 'X1', values = c('December 2016','March 2018','January 2019')) %>% 
+    st_set_dimensions(which = 'attributes', values = c('December 2016','March 2018','January 2019')) %>% 
     st_set_dimensions(names = c("x", "y", "month")) %>% 
     setNames('cm') 
   comparison$cm = as.factor(comparison$cm)
@@ -462,10 +513,10 @@ cm_plot = function(zoom, hillshade_zoom, subset_name, show_title = T){
     month = factor('January 2019')
   )
   ggplot() +
-    geom_stars(data = zoom) +
+    geom_stars(data = zoom, downsample = 0) +
     scale_fill_manual(values = cm_palette, na.translate = F) + 
     new_scale_fill() +
-    geom_stars(data = hillshade_zoom, downsample = 0, alpha = 0.25) +
+    geom_stars(data = hillshade_zoom, downsample = 0, alpha = 0.25, interpolate = TRUE) +
     scale_fill_gradientn(colours = grey.colors(100, start = 0, end=.95), guide='none', na.value = NA) +
     #blue, light green, violet, yellow
     coord_sf(crs = 2193) +

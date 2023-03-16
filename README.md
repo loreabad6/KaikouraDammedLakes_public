@@ -1,6 +1,6 @@
 # Landslide dammed-lakes detection and monitoring after the Kaikoura earthquake in New Zealand
 
-This repository centralizes the main processing steps to detect and monitor landslide-dammed lakes in NZ. It accompanies a [paper published in STOTEN](https://www.sciencedirect.com/science/article/pii/S0048969722004272)  This study is part of the ÖAW-funded [RiCoLa project](https://landslides-and-rivers.sbg.ac.at/).
+This repository centralizes the main processing steps to detect and monitor landslide-dammed lakes in NZ. It accompanies a [paper recently published in STOTEN](https://www.sciencedirect.com/science/article/pii/S0048969722004272)  This study is part of the ÖAW-funded [RiCoLa project](https://landslides-and-rivers.sbg.ac.at/).
 
 Please cite as:
 
@@ -18,11 +18,21 @@ If you would only like to see the main code, without a GEE account, please [clic
 
 The resulting datasets from the analysis are archived as assets [here](https://code.earthengine.google.com/?asset=projects/ee-loreabad6/assets/Kaikoura_landslidedammedlakes_update).
 
+<!-- 
+Running the main code file will display True and False Color RGB composites and an MNDWI layer for three specific dates: December 2016, March 2018 and January 2019. In addition the detected lakes will be also in the layer list. 
+
+When one clicks with the cursor on pixels that are covered by a detected lake on the map viewer, a time series will display as a chart on the bottom left corner showing the evolution of the lake during the 19 timestamps analyzed.
+-->
+
 Some steps were done outside GEE including:
 
 - [RSAGA generation of vertical distance to channel network layer](pre_processing/rsaga/vdcn_procedure.md)
 
 The resulting layer was then ingested into GEE. 
+
+A preview of how the GEE editor would look like with our results is shown below:
+
+![](EGU2020/GEE_layout.PNG)
 
 ### Acknowledgements:
 This research is supported by the Austrian Academy of Sciences (ÖAW) through the project RiCoLa (Detection and analysis of landslide-induced river course changes and lake formation) and by the New Zealand Ministry of Business, Innovation and Employment research program “Smarter Targeting of Erosion Control (STEC)” (Contract C09X1804).

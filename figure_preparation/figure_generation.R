@@ -2,9 +2,7 @@
 
 #' Load libraries
 library(cowplot)
-library(dplyr)
 library(ggmap)
-library(ggplot2)
 library(ggnewscale)
 library(ggspatial)
 library(patchwork)
@@ -15,8 +13,8 @@ library(rnaturalearth)
 library(scico)
 library(sf)
 library(stars)
-library(stringr)
-library(tidyr)
+library(tidyverse)
+library(tmap)
 library(tsibble)
 library(units)
 
@@ -43,7 +41,8 @@ landslide_dams = do.call(rbind, lapply(files_dams, st_read, quiet = T))
 ##' Hillshade generated from 15m DEM
 hillshade = read_stars("NZ_DEM_15m/hillshade.tif", proxy = T) 
 ##' Mapping results exported from GEE
-lakes = read_stars('results/mapping_results-0000000000-0000000000.tif', proxy = T)
+lakes = read_stars('results/results_update/mapping_results_update-0000000000-0000000000.tif', proxy = T)
+lakesproj = read_stars('results/results_update/mapping_results_update-epsg2193.tif', proxy = T)
 ##' Validation areas
 valareas = st_read('validation/validation_areas.geojson') %>% 
   # Select areas we use
@@ -77,7 +76,7 @@ epicenter = st_sf(
 dams = landslide_dams %>% 
   st_transform(crs = 4326) %>% 
   dplyr::select(geometry) %>% 
-  mutate(name = 'GNS landslide dams', color = 'white', shape = as.factor(17))
+  mutate(name = 'GNS Science\nlandslide dams', color = 'white', shape = as.factor(17))
 extra = rbind(dams, epicenter)
 
 ###' Call function to generate plot
@@ -104,7 +103,7 @@ ggsave(
   "fig1.png", 
   fig1, 
   device = "png", 
-  path = "manuscript/figures", 
+  path = "manuscript/figures",
   width = 10, height = 10,
   units = "cm", 
   dpi = "retina"
@@ -121,7 +120,7 @@ ggsave(
 
 # Figure 3 ----
 #' --------------------------------------------------------------------------------------------------
-#' **Fig. 3** Sentinel-2 scenes used to generate post-event monthly mosaics. a) MGRS tiles\' location, 
+#' **Fig. 3** Sentinel-2 scenes used to generate pre and post-event monthly mosaics. a) MGRS tiles\' location, 
 #' b) the number of Sentinel-2 scenes per MGRS tile
 
 ###' Call and pre-process data
@@ -134,23 +133,35 @@ coast = coast_outline %>%
 ###' the imagery used to generate the monthly mosaics. It was then manually copied to this script
 mosaic_data = tibble(
   month = as.Date(
-    c('01/12/2016', '01/01/2017', '01/02/2017', '01/10/2017', '01/11/2017', '01/12/2017', 
-      '01/01/2018', '01/02/2018', '01/03/2018', '01/10/2018', '01/11/2018', '01/01/2019', 
-      '01/02/2019', '01/03/2019', '01/01/2020', '01/02/2020', '01/03/2020'), format = '%d/%m/%Y'),
-  # value = c(13,9,29,22,35,33,34,29,33,37,29,48,50,39),
-  # s2a = c(13, 9,29,12,15,21,21,11,17,15,11,26,27,18,13,25, 8),
-  # s2b = c( 0, 0, 0,10,20,12,13,18,16,22,18,22,23,21, 7,12,31),
-  `59GPN` = c(1,2,4,3,4,3,4,3,6,4,3,6,7,5,2,5,4),
-  `59GPP` = c(1,2,3,4,4,4,4,3,4,8,5,7,6,6,3,3,6),
-  `59GQN` = c(1,1,4,3,5,4,4,5,5,4,5,7,5,4,1,5,5),
-  `59GQP` = c(2,1,5,4,5,5,6,4,6,5,4,6,7,5,4,6,4),
-  `59GQQ` = c(3,1,4,2,6,6,5,5,3,5,4,8,9,7,3,6,8),
-  `60GTU` = c(2,1,5,4,5,5,6,4,6,5,4,6,7,5,4,6,4),
-  `60GTV` = c(3,1,4,2,6,6,5,5,3,6,4,8,9,7,3,6,8)
+    c('01/12/2015', '01/02/2016', '01/04/2016',
+      '01/12/2016', '01/01/2017', '01/02/2017',
+      '01/10/2017', '01/11/2017', '01/12/2017', 
+      '01/01/2018', '01/02/2018', '01/03/2018',
+      '01/10/2018', '01/11/2018', '01/01/2019', 
+      '01/02/2019', '01/03/2019', '01/01/2020',
+      '01/02/2020', '01/03/2020', '01/02/2021',
+      '01/03/2021'), format = '%d/%m/%Y'),
+  # value = c(33,46,64,15, 9,29,36,35,33,34,29,33,37,29,48,50,39,20,37,39,34,25),
+  # s2a   = c(33,46,64,15, 9,29,14,15,21,21,11,17,15,11,26,27,18,13,25, 8,19, 9),
+  # s2b   = c( 0, 0, 0, 0, 0, 0,22,20,12,13,18,16,22,18,22,23,21, 7,12,34,15,16),
+  ## Seems to be a problem in GEE with co-registration and no update of metadata
+  ## I checked and conflicting images correspond to cloudy images that are anyway 
+  ## used only partially
+  ## The problem is for December 2015
+  # `59GPJ` = c( 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+  # `59GPK` = c( 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+  `59GPN` = c( 4, 6, 8, 1, 2, 4, 5, 4, 3, 4, 3, 6, 4, 3, 6, 7, 5, 2, 5, 4, 5, 5),
+  `59GPP` = c( 6, 4,10, 1, 2, 3, 5, 4, 4, 4, 3, 4, 8, 5, 7, 6, 6, 3, 3, 7, 6, 5),
+  # `59GQJ` = c( 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+  `59GQN` = c( 6, 4,10, 1, 1, 4, 6, 5, 4, 4, 5, 5, 4, 5, 7, 5, 4, 1, 5, 5, 5, 3),
+  `59GQP` = c( 4, 8,10, 2, 1, 5, 6, 5, 5, 6, 4, 6, 5, 4, 6, 7, 5, 4, 6, 4, 5, 3),
+  `59GQQ` = c( 4, 8, 8, 4, 1, 4, 4, 6, 6, 5, 5, 3, 5, 4, 8, 9, 7, 3, 6, 9, 4, 3),
+  `60GTU` = c( 4, 8,10, 2, 1, 5, 6, 5, 5, 6, 4, 6, 5, 4, 6, 7, 5, 4, 6, 4, 5, 3),
+  `60GTV` = c( 4, 8, 8, 4, 1, 4, 4, 6, 6, 5, 5, 3, 6, 4, 8, 9, 7, 3, 6, 9, 4, 3)
 ) %>% tidyr::gather(property, count, -month)
 
 ###' Load required data and preprocess
-s2tiles = st_read('ref_data/s2tiles_kaikoura.kml')
+s2tiles = st_read('ref_data/s2tiles_kaikoura.geojson')
 s2tiles_study = s2tiles %>% 
   st_zm(drop = T) %>% 
   right_join(mosaic_data, by = c('Name'='property')) %>% 
@@ -172,7 +183,7 @@ fig3a = ggplot() +
     label_graticule = 'NW', clip = "on"
   ) + 
   theme(
-    text = element_text(family = 'sans', size = 9),
+    text = element_text(family = 'sans', size = 7),
     panel.background = element_rect(fill = "transparent"), 
     axis.title = element_blank(),
     axis.text.y = element_text(angle = 90, hjust = 0.5),
@@ -180,7 +191,14 @@ fig3a = ggplot() +
   )
 
 ###' Generate plot 3b
-fig3b = ggplot(mosaic_data ) +
+fig3b = ggplot(mosaic_data) +
+  geom_vline(xintercept = as.Date("2016-11-14")) +
+  annotate(
+    geom = "text",
+    x = as.Date("2016-10-20"), y = 40,
+    label = "Mw 7.8 Kaikōura earthquake",
+    angle = 90, size = 2
+  ) +
   geom_col(aes(x = month, y = count, fill = property), alpha = 0.7) + 
   # scale_fill_manual('Satellite', values = c('lightskyblue1', 'lightskyblue3'), labels = c('Sentinel-2A', 'Sentinel-2B')) +
   xlab('') + ylab('Number of Sentinel-2 scenes') +
@@ -193,7 +211,7 @@ fig3b = ggplot(mosaic_data ) +
   theme(
     axis.title.y.right = element_text(margin = margin(t = 0, r = 0, b = 0, l = 8), size = 9),
     axis.title.x = element_blank(),
-    axis.text = element_text(size = 8),
+    axis.text = element_text(size = 7),
     axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5),
     legend.position = 'top', legend.text = element_text(size = 7), 
     legend.title = element_text(size = 9), 
@@ -219,7 +237,7 @@ ggsave(
   fig3, 
   device = "pdf", 
   path = "manuscript/figures", 
-  width = 15, height = 7.6,
+  width = 16, height = 7.6,
   units = "cm", 
   dpi = "retina"
 )
@@ -230,7 +248,7 @@ ggsave(
   fig3, 
   device = "png", 
   path = "manuscript/figures", 
-  width = 15, height = 7.6,
+  width = 16, height = 7.6,
   units = "cm", 
   dpi = "retina"
 )
@@ -241,16 +259,20 @@ ggsave(
 #'  
 #' Created in power point. See figure_preparation/figure_refinement.pptx
 
+# Figure 5 ----
 #' --------------------------------------------------------------------------------------------------
 #' **Fig. 5** Subset areas used for validation and examples of landslide-dammed lakes. 
-#' a) Location of subset areas within the study area. 
-#' b) Hapuku river landslide dam (Hapuku 740) and its corresponding lake within subset B 
-#' (© James Thompson -- Environment Canterbury 2016; date taken: January 4, 2017). 
-#' c) Leader river landslide-dammed lake and d) Leader river dam (Leader 220) located within subset A 
-#' (© Anne-Laure Argentin 2019; date taken: January 3, 2019)
+#' a) Location of subset areas within the study area. b) Leader river dam (Leader 220) 
+#' and c) Leader river landslide-dammed lake located within subset A 
+#' (© Anne-Laure Argentin 2019; date taken: 03-01-2019). 
+#' d) Subset A and e) Subset B show Sentinel-2 false color composites for 15-12-2016 
+#' with RGB: B8-B4-B3; vegetation is represented in red while bare soil shows brown 
+#' colorations. f) Hapuku river landslide dam (Hapuku 740) and its corresponding lake 
+#' within subset B (© James Thompson -- Environment Canterbury 2016; date taken: 01-04-2017)
 #' 
-#' Fig 5a was created with the code below. Fig 5b,c,d are field photographs. The final composition is 
-#' done in powerpoint. See figure_preparation/figure_validation_field.pptx
+#' Fig 5a,d,e was created with the code below. Fig 5b,c,f are field photographs. 
+#' The final composition is done in powerpoint.
+#' See figure_preparation/figure_validation_field.pptx
 
 ###' Call data and preprocess
 starea = study_area %>%
@@ -258,6 +280,10 @@ starea = study_area %>%
 coast = coast_outline %>% 
   st_transform(crs = 2193) 
 areas_reshaped = validation_areas
+# Workaround to add scale bar only to one plot
+scale_params = tibble::tibble(
+  band = factor('December 2016')
+)
 
 ###' Generate plot 5a
 fig5a = ggplot() +
@@ -279,8 +305,8 @@ fig5a = ggplot() +
   ) +
   theme_void() +
   theme(
-    legend.position = c(0.3,0.99), 
-    plot.margin = margin(), 
+    legend.position = c(0.7,0.99), 
+    plot.margin = margin(),
     legend.text = element_text(size = 6),
     legend.key.size = unit(0.2, 'cm'), legend.spacing.x = unit(0.1, 'cm')
   )
@@ -289,7 +315,86 @@ fig5a = ggplot() +
 ggsave(
   fig5a, filename = 'fig5a.png', 
   path = "figure_preparation/figure_elements", device = 'png',
-  width = 4, height = 4.7, units = 'cm', dpi = 300
+  width = 3.4, height = 4, units = 'cm', dpi = 300
+)
+
+###' Generate plots 5e and 5f
+val_areas = st_read('validation/validation_areas.geojson', quiet = T) %>% 
+  filter(id %in% c(0,3))
+val0 = val_areas %>% filter(id == 0) %>% sf_as_ee()
+val3 = val_areas %>% filter(id == 3) %>% sf_as_ee()
+
+bg = ee$ImageCollection("COPERNICUS/S2")$
+  filterDate(ee$Date('2016-12-01'), ee$Date('2016-12-31'))$
+  filterBounds(val0)$
+  sort("CLOUDY_PIXEL_PERCENTAGE", TRUE)$
+  select(c("B11","B8", "B4", "B3", "B2"))$  
+  first()
+bg_fc = ee_as_thumbnail(
+  bg$select(c("B8", "B4", "B3")), 
+  region = val0$geometry(), dimensions = 2048, 
+  vizparams = list(min = 0, max = 6000, gamma = 1.7)
+) 
+
+bg3 = ee$ImageCollection("COPERNICUS/S2")$
+  filterDate(ee$Date('2016-12-01'), ee$Date('2016-12-31'))$
+  filterBounds(val3)$
+  sort("CLOUDY_PIXEL_PERCENTAGE", TRUE)$
+  select(c("B11","B8", "B4", "B3", "B2"))$  
+  first()
+
+bg3_fc = ee_as_thumbnail(
+  bg3$select(c("B8", "B4", "B3")), 
+  region = val3$geometry(), dimensions = 2048, 
+  vizparams = list(min = 0, max = 6000, gamma = 1.7)
+) 
+
+dams = landslide_dams %>% 
+  filter(OBJECTID_1 %in% c(516, 528)) %>% 
+  mutate(label = c("Hapuku dam", "Leader dam"))
+
+subsetA = tm_shape(bg_fc) +
+  tm_rgb(max.value = 1) +
+  tm_shape(dams)  +
+  tm_dots(col = 'white', shape = 20, size = 0.2) +
+  tm_text(text = "Formal_Nam", col = "white",
+          fontface = "bold", ymod = -0.5, size = 0.65) +
+  tm_scale_bar(
+    # color.dark = "white", color.light = "black",
+    text.color = "black",
+    breaks = c(0,1,2),
+    text.size = 0.5,
+    position = c('right', 'bottom')
+  ) +
+  tm_layout(
+    outer.margins = c(0,0,0,0),
+    frame = F
+  )
+tmap_save(
+  subsetA, width = 8.885, height = 5, units = 'cm',
+  filename = "figure_preparation/figure_elements/fig5d.png"
+)
+
+subsetB = tm_shape(bg3_fc) +
+  tm_rgb(max.value = 1) +
+  tm_shape(dams)  +
+  tm_dots(col = 'white', shape = 20, size = 0.2) +
+  tm_text(text = "Formal_Nam", col = "white",
+          fontface = "bold", ymod = 0.6, size = 0.65) +
+  tm_scale_bar(
+    # color.dark = "white", color.light = "black",
+    text.color = "black",
+    breaks = c(0,1,2),
+    text.size = 0.5,
+    position = c('left', 'bottom')
+  ) +
+  tm_layout(
+    outer.margins = c(0,0,0,0),
+    frame = F
+  )
+tmap_save(
+  subsetB, width = 8.91, height = 5.69, units = 'cm',
+  filename = "figure_preparation/figure_elements/fig5e.png"
 )
 
 # Figure 6 ----
@@ -306,20 +411,22 @@ areas_hs = areas_reshaped %>%
 hs_a0 = hillshade[areas_hs[1,]]
 hs_a3 = hillshade[areas_hs[2,]]
 lakes = read_stars(
-  'results/mapping_results-0000000000-0000000000.tif', 
+  'results/results_update/mapping_results_update-0000000000-0000000000.tif', 
   proxy = T, NA_value = 0
-) 
+)
 areas_lakes = areas_reshaped %>% 
   st_transform(crs = st_crs(lakes)) %>% 
   filter(year == '2016-12') %>% 
   mutate(name = c('Subset A', 'Subset B'))
-lakes_a0 = lakes[,,,c(2,9,13)][areas_lakes[1,]] %>% 
+lakes_a0 = lakes[,,,c(4,12,15)][areas_lakes[1,]] %>% 
   st_as_stars() %>% 
+  st_transform(crs = st_crs(hillshade)) %>% 
   na_if(0) %>% 
   dplyr::select(lake = everything()) %>% 
   st_set_dimensions(which = 'band', values = c('December 2016','March 2018','January 2019'))
-lakes_a3 = lakes[,,,c(2,9,13)][areas_lakes[2,]] %>%   
+lakes_a3 = lakes[,,,c(4,12,15)][areas_lakes[2,]] %>%   
   st_as_stars() %>% 
+  st_transform(crs = st_crs(hillshade)) %>%
   na_if(0) %>% 
   dplyr::select(lake = everything()) %>% 
   st_set_dimensions(which = 'band', values = c('December 2016','March 2018','January 2019'))
@@ -330,11 +437,12 @@ scale_params = tibble::tibble(
 
 ###' Generate plot 6 left
 fig6left = ggplot() +
-  geom_stars(data = hs_a0) +
-  scico::scale_fill_scico(15, begin = 0, end = 0.25, alpha = 0.75, palette = 'grayC', na.value = NA) +
+  geom_stars(data = hs_a0, downsample = 0) +
+  scico::scale_fill_scico(15, begin = 0, end = 0.25, alpha = 0.75, 
+                          palette = 'grayC', na.value = NA) +
   coord_sf(crs = 2193) +
   new_scale_fill() +
-  geom_stars(data = lakes_a0, downsample = 1) +
+  geom_stars(data = lakes_a0, downsample = 0) +
   scale_fill_gradient(low = 'darkblue', high = 'darkblue', na.value = NA) +
   scale_x_continuous(expand = c(0, 0)) +
   scale_y_continuous(expand = c(0, 0)) +
@@ -345,22 +453,25 @@ fig6left = ggplot() +
     width_hint = 0.25, height = unit(0.15, "cm"), text_cex = 0.5
   ) +
   theme(
-    plot.title = element_text(size = 9, hjust = 0.5, margin = margin(b = 1, unit = 'mm')),
-    axis.title = element_blank(), axis.text = element_blank(), axis.ticks = element_blank(),
+    plot.title = element_text(size = 9, hjust = 0.5, 
+                              margin = margin(b = 1, unit = 'mm')),
+    axis.title = element_blank(), axis.text = element_blank(), 
+    axis.ticks = element_blank(),
     panel.background = element_blank(), plot.background = element_blank(), 
     strip.background = element_blank(), panel.grid = element_blank(),
-    # plot.margin = margin(rep(0.5,4), unit = 'mm'), 
+    plot.margin = margin(rep(0,4), unit = 'null'),
     legend.position = 'none', 
     panel.spacing = unit(1, "mm")#, panel.spacing.y = unit(0, "cm")
   )
 
 ###' Generate plot 6 right
 fig6right = ggplot() +
-  geom_stars(data = hs_a3) +
-  scico::scale_fill_scico(15, begin = 0, end = 0.25, alpha = 0.75, palette = 'grayC', na.value = NA) +
+  geom_stars(data = hs_a3, downsample = 0) +
+  scico::scale_fill_scico(15, begin = 0, end = 0.25, alpha = 0.75,
+                          palette = 'grayC', na.value = NA) +
   coord_sf(crs = 2193) +
   new_scale_fill() +
-  geom_stars(data = lakes_a3, downsample = 1) +
+  geom_stars(data = lakes_a3, downsample = 0) +
   scale_fill_gradient(low = 'darkblue', high = 'darkblue', na.value = NA) +
   scale_x_continuous(expand = c(0, 0)) +
   scale_y_continuous(expand = c(0, 0)) +
@@ -371,33 +482,40 @@ fig6right = ggplot() +
     width_hint = 0.25, height = unit(0.15, "cm"), text_cex = 0.5
   ) +
   theme(
-    plot.title = element_text(size = 9, hjust = 0.5, margin = margin(b = 1, unit = 'mm')),
-    axis.title = element_blank(), axis.text = element_blank(), axis.ticks = element_blank(),
+    plot.title = element_text(size = 9, hjust = 0.5, 
+                              margin = margin(b = 1, unit = 'mm')),
+    axis.title = element_blank(), axis.text = element_blank(),
+    axis.ticks = element_blank(),
     panel.background = element_blank(), plot.background = element_blank(), 
     strip.background = element_blank(), panel.grid = element_blank(),
-    strip.text = element_blank(), #plot.margin = margin(rep(0.5,4), unit = 'mm'),
-    legend.position = 'none', panel.spacing = unit(0.5, "mm")#, panel.spacing.y = unit(0, "cm")
+    strip.text = element_blank(), plot.margin = margin(rep(0,4), unit = 'null'),
+    legend.position = 'none', panel.spacing = unit(0.6, "mm")#, panel.spacing.y = unit(0, "cm")
   )
 
-fig6 = fig6left | fig6right
+fig6 = plot_grid(fig6left, fig6right, rel_widths = c(1.2, 1))
 
 ###' Save to PDF
 ggsave(
   fig6, filename = 'fig6.pdf', 
   path = "manuscript/figures", device = 'pdf',
-  width = 15, height = 12.56, units = 'cm', dpi = 350
+  width = 14, height = 12.33, units = 'cm', dpi = 350
 )
-
+# 12.33, 13.54
 ###' Save to PNG
 ggsave(
   fig6, filename = 'fig6.png', 
   path = "manuscript/figures", device = 'png',
-  width = 15, height = 12.56, units = 'cm', dpi = 350
+  width = 14, height = 12.33, units = 'cm', dpi = 350
 )
 
 # Figure 7 ----
 #' --------------------------------------------------------------------------------------------------
 #' **Fig. 7** Landslide-dammed lake surface area monitoring and time series analysis for selected dams
+
+###' Call computed result from GEE with lake areas per connected component
+ee_Initialize()
+lake_sum = ee$Image("projects/ee-loreabad6/assets/Kaikoura_landslidedammedlakes_update/dammedLakes_components")
+# lake_occ = ee$Image("projects/ee-loreabad6/assets/Kaikoura_landslidedammedlakes_update/dammedLakes_occurrence")
 
 ###' Call dam data 
 dams = landslide_dams
@@ -407,24 +525,34 @@ dams_ts = dams %>%
   filter(OBJECTID_1 %in% c(484,499,516,528,534,536,540,563,569,574)) %>% 
   mutate(OBJECTID_1 = as.factor(OBJECTID_1))
 
-# Call and prepare time series files. This are exported manually from the GEE.
-files_ts = list.files('time-series', pattern = '.csv', full.names = T) 
-ts = do.call(
-  rbind, 
-  lapply(
-    files_ts, 
-    function(x) cbind(
-      read.csv(x, na.strings = '', dec = '.', stringsAsFactors = F),
-      name=strsplit(strsplit(x,'\\/')[[1]][2], '\\.')[[1]][1])
-  )
-) %>% 
+# Call and prepare time series. 
+# points_time_series.geojson is generated here: 
+# https://code.earthengine.google.com/b346dc0ff6f2669f94084dc7aa8719ab?noload=true
+
+points = st_read('results/points_time_series.geojson') %>% 
+  mutate(id = as.factor(id), OBJECTID_1 = as.factor(OBJECTID_1))
+points_ee = sf_as_ee(points)
+
+lake_area = ee_extract(lake_sum, points_ee, scale = 10, sf = TRUE)
+
+lake_ts = lake_area %>% 
+  pivot_longer(
+    starts_with("lake"),
+    names_to = 'dateid',
+    values_to = 'area'
+  ) %>% 
   mutate(
-    date = as.Date(system.time_start, format = '%b %d, %Y'),
-    sumArea = as.numeric(gsub(",", "", sumArea))/10000,
+    date = dateid %>% 
+      str_remove("lake") %>% 
+      paste0("01") %>% 
+      as.Date(format = "%Y%m%d"),
     month = yearmonth(format(date, '%Y-%m')),
-    objectid = stringr::str_extract(name, "(\\d)+")
-  ) %>%
-  inner_join(dams_ts, by = c('objectid' = 'OBJECTID_1')) %>% 
+    area = area / 10000
+  )
+  
+ts = lake_ts %>% 
+  select(-geometry)%>% 
+  inner_join(dams_ts, by = 'OBJECTID_1') %>% 
   mutate(
     coord_x = paste(gsub(' ', '°', 
                          measurements::conv_unit(
@@ -442,42 +570,54 @@ ts = do.call(
                 ))), 'S')
   ) %>% 
   mutate(coords = paste(coord_x, coord_y, sep = ", ")) %>% 
-  group_by(Formal_Nam, month, objectid) %>% 
+  group_by(Formal_Nam, month, OBJECTID_1) %>% 
   summarize(
-    sumArea = sum(sumArea, na.rm = T), 
+    area = sum(area, na.rm = T), 
     Key_Dam = first(Key_Dam), 
     coords = first(coords)
   ) %>% 
   filter(
     month != yearmonth('2015-12-01')
   ) %>% 
-  as_tsibble(key = c(Formal_Nam, Key_Dam, coords, objectid), index = month) %>% 
+  as_tsibble(key = c(Formal_Nam, Key_Dam, coords, OBJECTID_1), index = month) %>% 
   ungroup() %>% fill_gaps() %>% 
   mutate(
     category = ifelse(
-      objectid == 484, 'increasing', 
-      ifelse(objectid == 528, 'constant', 
-             ifelse(objectid == 516, 'decreasing', 'variable')
+      OBJECTID_1 == 484, 'increasing', 
+      ifelse(OBJECTID_1 == 528, 'constant', 
+             ifelse(OBJECTID_1 == 516, 'decreasing', 'variable')
       ))) %>% 
   mutate(label = paste0(Formal_Nam, ifelse(Key_Dam == 'Y', ' (Key dam)',''), ': ', coords))
 
 ###' Apply function to selected dams to obtain the lake occurrence plots
-bourne_484 = plot_lake_occurrence(dams = dams, 484, nudge_x = 0, nudge_y = 120, position = 'right', zoom_buffer = 250)
-conway_499 = plot_lake_occurrence(dams = dams, 499, nudge_x = -38, nudge_y = 286, zoom_buffer = 300)
-hapuku_516 = plot_lake_occurrence(dams = dams, 516, nudge_x = 200, nudge_y = 0, zoom_buffer = 500)
-leader_528 = plot_lake_occurrence(dams = dams, 528, nudge_x = -750, nudge_y = 500, zoom_buffer = 800)
-leader_534 = plot_lake_occurrence(dams = dams, 534, nudge_x = 0, nudge_y = 0, zoom_buffer = 200)
+bourne_484 = plot_lake_occurrence(dams = dams, 484, nudge_x = 0, background = T,
+                                  nudge_y = 120, position = 'right',
+                                  zoom_buffer = 250)
+conway_499 = plot_lake_occurrence(dams = dams, 499, nudge_x = -38, background = T,
+                                  nudge_y = 286, zoom_buffer = 300)
+hapuku_516 = plot_lake_occurrence(dams = dams, 516, nudge_x = 200, background = T,
+                                  nudge_y = 0, zoom_buffer = 500)
+leader_528 = plot_lake_occurrence(dams = dams, 528, nudge_x = -750, background = T,
+                                  nudge_y = 500, zoom_buffer = 800)
+leader_534 = plot_lake_occurrence(dams = dams, 534, nudge_x = 0, background = T,
+                                  nudge_y = 0, zoom_buffer = 200)
 
-leader_536 = plot_lake_occurrence(dams = dams, 536, nudge_x = 0, nudge_y = 0, position = 'right', zoom_buffer = 200)
-linton_540 = plot_lake_occurrence(dams = dams, 540, nudge_x = 0, nudge_y = 0, zoom_buffer = 200)
-stanton_563 = plot_lake_occurrence(dams = dams, 563, nudge_x = 0, nudge_y = 150, zoom_buffer = 300)
-stanton_569 = plot_lake_occurrence(dams = dams, 569, nudge_x = 0, nudge_y = 0, zoom_buffer = 200)
-stanton_574 = plot_lake_occurrence(dams = dams, 574, nudge_x = 100, nudge_y = 150, zoom_buffer = 300)
+leader_536 = plot_lake_occurrence(dams = dams, 536, nudge_x = 0, background = T,
+                                  nudge_y = 0, position = 'right',
+                                  zoom_buffer = 200)
+linton_540 = plot_lake_occurrence(dams = dams, 540, nudge_x = 0, background = T,
+                                  nudge_y = 0, zoom_buffer = 200)
+stanton_563 = plot_lake_occurrence(dams = dams, 563, nudge_x = 0, background = T,
+                                   nudge_y = 150, zoom_buffer = 300)
+stanton_569 = plot_lake_occurrence(dams = dams, 569, nudge_x = 0, background = T,
+                                   nudge_y = 0, zoom_buffer = 200)
+stanton_574 = plot_lake_occurrence(dams = dams, 574, nudge_x = 100, background = T,
+                                   nudge_y = 150, zoom_buffer = 300)
 
 ###' Apply function to plot the time series of lake surface, data is split in half.
 ###' That is 5 dams per page
-ts1 = ts_plot(ts[1:200,])
-ts2 = ts_plot(ts[201:400,])
+ts1 = ts_plot(ts[1:260,])
+ts2 = ts_plot(ts[261:520,])
 
 ###' Create layout and patches for patchwork
 layout = "
@@ -488,9 +628,11 @@ AAAAE
 AAAAF
 "
 
-patch1 = ts1 + bourne_484 + conway_499 + hapuku_516 + leader_528 + leader_534 +
+patch1 = ts1 + bourne_484 + conway_499 + hapuku_516 +
+  leader_528 + leader_534 +
   plot_layout(design = layout)
-patch2 = ts2 + leader_536 + linton_540 + stanton_563 + stanton_569 + stanton_574 +
+patch2 = ts2 + leader_536 + linton_540 + stanton_563 +
+  stanton_569 + stanton_574 +
   plot_layout(design = layout)
 
 ###' Apply function to combine plots with patchwork
@@ -532,14 +674,13 @@ dams = landslide_dams
 
 ###' This plot gathers data from the GEE directly, so a connection with the `rgee` package is required
 ee_Initialize()
-ee_reattach()
 
 ###' Note: the recordPlot() function allows to store the resulting plot to a device. It will record
 ###' as it shows on the plot viewer on RStudio and this can be a source of misplacement of 
 ###' certain elements in the final plot.
 ###' Hint: set plot viewer to 1022, 357 for good results
 
-###' Apply function to generate facet plots for specific dams were no lakes were detected
+###' Apply function to generate facet plots for specific dams where no lakes were detected
 plot_lake_detection(510, zoom_buffer = 700)
 p1 = recordPlot()
 plot_lake_detection(532, zoom_buffer =800)
@@ -561,8 +702,8 @@ p5 = recordPlot()
 
 ###' Create the remaining elements of the legend
 #https://stackoverflow.com/questions/21262472/adjust-spacing-between-text-in-horizontal-legend
-legtext = c('Detected landslide-dammed lake','GNS lansdlide dam', 'MNDWI values')
-xcoords = c(0, 0.45, 0.74)
+legtext = c('Detected landslide-dammed lake','GNS Science lansdlide dam', 'MNDWI values')
+xcoords = c(0, 0.40, 0.75)
 secondvector = (1:length(legtext))-1
 textwidths = xcoords/secondvector # this works for all but the first element
 textwidths[1] = 0 
@@ -696,24 +837,38 @@ dams_ts = dams %>%
   filter(OBJECTID_1 %in% c(484,516,528,574)) %>% 
   mutate(OBJECTID_1 = as.factor(OBJECTID_1))
 
-# Call and prepare time series files. This are exported manually from the GEE.
-files_ts = list.files('time-series', pattern = '.csv', full.names = T) 
-ts = do.call(
-  rbind, 
-  lapply(
-    files_ts, 
-    function(x) cbind(
-      read.csv(x, na.strings = '', dec = '.', stringsAsFactors = F),
-      name=strsplit(strsplit(x,'\\/')[[1]][2], '\\.')[[1]][1])
-  )
-) %>% 
+###' Call computed result from GEE with lake areas per connected component
+ee_Initialize(user = "loreabad6")
+lake_sum = ee$Image("projects/ee-loreabad6/assets/Kaikoura_landslidedammedlakes_update/dammedLakes_components")
+
+# Call and prepare time series
+# points_time_series.geojson is generated here: 
+# https://code.earthengine.google.com/b346dc0ff6f2669f94084dc7aa8719ab?noload=true
+
+points = st_read('results/points_time_series.geojson') %>% 
+  mutate(id = as.factor(id), OBJECTID_1 = as.factor(OBJECTID_1))
+points_ee = sf_as_ee(points)
+
+lake_area = ee_extract(lake_sum, points_ee, scale = 10, sf = TRUE)
+
+lake_ts = lake_area %>% 
+  pivot_longer(
+    starts_with("lake"),
+    names_to = 'dateid',
+    values_to = 'area'
+  ) %>% 
   mutate(
-    date = as.Date(system.time_start, format = '%b %d, %Y'),
-    sumArea = as.numeric(gsub(",", "", sumArea))/10000,
+    date = dateid %>% 
+      str_remove("lake") %>% 
+      paste0("01") %>% 
+      as.Date(format = "%Y%m%d"),
     month = yearmonth(format(date, '%Y-%m')),
-    objectid = stringr::str_extract(name, "(\\d)+")
-  ) %>%
-  inner_join(dams_ts, by = c('objectid' = 'OBJECTID_1')) %>% 
+    area = area / 10000
+  )
+
+ts = lake_ts %>% 
+  st_drop_geometry() %>% 
+  inner_join(dams_ts, by = 'OBJECTID_1') %>% 
   mutate(
     coord_x = paste(gsub(' ', '°', 
         measurements::conv_unit(
@@ -731,46 +886,69 @@ ts = do.call(
     ))), 'S')
   ) %>% 
   mutate(coords = paste(coord_x, coord_y, sep = ", ")) %>% 
-  group_by(Formal_Nam, month, objectid) %>% 
+  group_by(Formal_Nam, month, OBJECTID_1) %>% 
   summarize(
-    sumArea = sum(sumArea, na.rm = T), 
+    area = sum(area, na.rm = T), 
     Key_Dam = first(Key_Dam), 
     coords = first(coords)
-    #   apply(
-    #     round(
-    #       st_coordinates(
-    #         st_transform(geometry, 4326)
-    #       ),
-    #       2
-    #     ),
-    #     1,paste,collapse=", ")
-    # )
   ) %>% 
   filter(
     month != yearmonth('2015-12-01')
   ) %>% 
-  as_tsibble(key = c(Formal_Nam, Key_Dam, coords, objectid), index = month) %>% 
+  as_tsibble(key = c(Formal_Nam, Key_Dam, coords, OBJECTID_1), index = month) %>% 
   ungroup() %>% fill_gaps() %>% 
   mutate(
     category = ifelse(
-      objectid == 484, 'increasing', 
-      ifelse(objectid == 528, 'constant', 
-             ifelse(objectid == 516, 'decreasing', 'variable')
+      OBJECTID_1 == 484, 'increasing', 
+      ifelse(OBJECTID_1 == 528, 'constant', 
+             ifelse(OBJECTID_1 == 516, 'decreasing', 'variable')
       ))) %>% 
   mutate(label = paste0(Formal_Nam, ifelse(Key_Dam == 'Y', ' (Key dam)',''), ': ', coords))
 
-bourne_484 = plot_lake_occurrence(dams = dams, 484, nudge_x = 0, nudge_y = 120, position = 'right', zoom_buffer = 250, bg = T)
-leader_528 = plot_lake_occurrence(dams = dams, 528, nudge_x = -750, nudge_y = 500, zoom_buffer = 800, bg = T)
-hapuku_516 = plot_lake_occurrence(dams = dams, 516, nudge_x = 200, nudge_y = 0, zoom_buffer = 500, bg = T)
-stanton_574 = plot_lake_occurrence(dams = dams, 574, nudge_x = 100, nudge_y = 150, zoom_buffer = 300, bg = T)
-time_series = ts_plot(ts) + 
-  facet_wrap(~category, ncol = 1, strip.position = 'left', scales = 'free_y') + 
-  ylab('Landslide-dammed lake classification according to lake area evolution') +
+
+bourne_484 = plot_lake_occurrence(dams = dams, 484, nudge_x = 0,
+                                  nudge_y = 120, position = 'right', 
+                                  zoom_buffer = 250, background = T,
+                                  scale_text_cex = 0.8,
+                                  scale_height = unit(0.12, "cm"),
+                                  scale_width_hint = 0.3,
+                                  legend_title_size = 11,
+                                  legend_text_size = 11)
+leader_528 = plot_lake_occurrence(dams = dams, 528, nudge_x = -750,
+                                  nudge_y = 500, zoom_buffer = 800,
+                                  background = T,
+                                  scale_text_cex = 0.8,
+                                  scale_height = unit(0.12, "cm"),
+                                  scale_width_hint = 0.3,
+                                  legend_title_size = 11,
+                                  legend_text_size = 11)
+hapuku_516 = plot_lake_occurrence(dams = dams, 516, nudge_x = 200,
+                                  nudge_y = 0, zoom_buffer = 500, 
+                                  background = T,
+                                  scale_text_cex = 0.8,
+                                  scale_height = unit(0.12, "cm"),
+                                  scale_width_hint = 0.3,
+                                  legend_title_size = 11,
+                                  legend_text_size = 11)
+stanton_574 = plot_lake_occurrence(dams = dams, 574, nudge_x = 100, 
+                                   nudge_y = 150, zoom_buffer = 300,
+                                   background = T,
+                                   scale_text_cex = 0.8,
+                                   scale_height = unit(0.12, "cm"),
+                                   scale_width_hint = 0.3,
+                                   legend_title_size = 11,
+                                   legend_text_size = 11)
+time_series = ts_plot(ts, legend_title_size = 13,
+                      date_breaks_months =  '12 month', label = F) + 
+  facet_wrap(~category, ncol = 1, strip.position = 'left',
+             scales = 'free_y'
+             ) + 
   theme(
-    strip.text = element_text(face = 'italic'), 
-    axis.title.y = element_text(size = 10, color = 'grey20', face = 'italic'),
+    strip.text.y.left = element_text(face = 'italic', size = 14,
+                                     angle = 0, margin = margin(r = 10)), 
     axis.text.y = element_blank(), axis.ticks.y = element_blank(),
-    axis.text.x = element_text(size = 7)
+    axis.text.x = element_text(size = 11, angle = 0, hjust = 0.5),
+    axis.title.y = element_blank()
   )
 
 ###' Create layout and patches for patchwork
@@ -782,20 +960,34 @@ AAAAE
 "
 
 patch = time_series + leader_528 + hapuku_516 + bourne_484 + stanton_574 +
-  plot_layout(design = layout)
+  plot_layout(design = layout) 
 
 ###' Apply function to combine plots with patchwork
-fig_ga = plot_build(patch)
-
+# fig_ga = plot_build(patch, legend_title_size = 10, legend_text_size = 10)
+fig_ga = 
+  ((patch + plot_layout(widths = c(0.65,0.35))) + guide_area()) +
+  plot_layout(guides = 'collect', width = c(0.65,0.35)) +
+  plot_annotation(title = 'Landslide-dammed lake classification according to lake area evolution') &
+  theme(
+    plot.title = element_text(size = 18, color = 'grey20', 
+                              face = 'italic', hjust = 0.5),
+    legend.direction = 'vertical',
+    legend.title = element_text(size = 13, margin = margin(b = 10)),
+    legend.title.align = 0.5, legend.box = 'vertical',
+    legend.text = element_text(size = 11), 
+    legend.key.height = unit(7, 'mm')
+    # legend.position = 'top'
+  )
 ###' Save to PDF
 ggsave(
-  'graphical_abstract.pdf', fig_ga, 
-  path = "manuscript/figures", device = 'pdf',
-  width = 16.5, height = 18, units = 'cm', dpi = 350
+  'graphical_abstract_revision.pdf', fig_ga,
+  path = "manuscript", device = 'pdf',
+  width = 22, height = 15, units = 'cm', dpi = 350
 )
 ###' Save to PNG
 ggsave(
-  'graphical_abstract.png', fig_ga, 
-  path = "manuscript/figures", device = 'png',
-  width = 16.5, height = 18, units = 'cm', dpi = 350
+  'graphical_abstract_revision.png', fig_ga, 
+  path = "manuscript", device = 'png',
+  width = 22, height = 15, units = 'cm', dpi = 350
 )
+

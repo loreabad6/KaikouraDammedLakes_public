@@ -1,3 +1,5 @@
+Note: This process is not followed anymore since GEE ingested new tiles for Sentinel-2 data
+
 ### Process to generate Sentinel-2 pre event image before ingesting on Earth Engine:
 
 - Create mosaic in QGIS using SCP (Congedo)

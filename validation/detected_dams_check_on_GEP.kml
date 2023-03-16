@@ -1,0 +1,1075 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+<Document id="root_doc">
+<Schema name="detected_dams_check_on_GEP" id="detected_dams_check_on_GEP">
+	<SimpleField name="OBJECTID" type="float"></SimpleField>
+	<SimpleField name="SCALE" type="string"></SimpleField>
+	<SimpleField name="LAKE" type="string"></SimpleField>
+	<SimpleField name="HAZARD" type="string"></SimpleField>
+	<SimpleField name="NZTM_E" type="float"></SimpleField>
+	<SimpleField name="NZTM_N" type="float"></SimpleField>
+	<SimpleField name="LAT" type="float"></SimpleField>
+	<SimpleField name="LONG_" type="float"></SimpleField>
+	<SimpleField name="OBS_METHOD" type="string"></SimpleField>
+	<SimpleField name="LOC_ACCURA" type="string"></SimpleField>
+	<SimpleField name="ORINGINATO" type="string"></SimpleField>
+	<SimpleField name="Formal_Nam" type="string"></SimpleField>
+	<SimpleField name="Key_Dam" type="string"></SimpleField>
+	<SimpleField name="Photo" type="string"></SimpleField>
+	<SimpleField name="Last_Check" type="string"></SimpleField>
+	<SimpleField name="Dam_Status" type="string"></SimpleField>
+	<SimpleField name="thumbnail" type="string"></SimpleField>
+	<SimpleField name="src" type="string"></SimpleField>
+	<SimpleField name="Photo_Date" type="string"></SimpleField>
+	<SimpleField name="OBJECTID_1" type="float"></SimpleField>
+	<SimpleField name="GlobalID" type="string"></SimpleField>
+</Schema>
+<Folder><name>detected_dams_check_on_GEP</name>
+  <Placemark>
+	<name>Conway 2</name>
+	<ExtendedData><SchemaData schemaUrl="#detected_dams_check_on_GEP">
+		<SimpleData name="OBJECTID">17</SimpleData>
+		<SimpleData name="SCALE">Large</SimpleData>
+		<SimpleData name="LAKE">Moderate</SimpleData>
+		<SimpleData name="HAZARD">High</SimpleData>
+		<SimpleData name="NZTM_E">1621650</SimpleData>
+		<SimpleData name="NZTM_N">5303900</SimpleData>
+		<SimpleData name="LAT">-42.41690562</SimpleData>
+		<SimpleData name="LONG_">173.26314233</SimpleData>
+		<SimpleData name="OBS_METHOD">Helicopter Recon with GPS</SimpleData>
+		<SimpleData name="LOC_ACCURA">within 200m</SimpleData>
+		<SimpleData name="ORINGINATO">GNS Science/S Cox</SimpleData>
+		<SimpleData name="Formal_Nam">Conway 420</SimpleData>
+		<SimpleData name="Key_Dam">Y</SimpleData>
+		<SimpleData name="Photo">170407_Conway_420.jpg</SimpleData>
+		<SimpleData name="Dam_Status">Dam has breached and a substantial channel has eroded through the toe of the landslide. Hazard is significantly minimised.</SimpleData>
+		<SimpleData name="src">GNS</SimpleData>
+		<SimpleData name="OBJECTID_1">499</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>173.263142330016,-42.416905616883</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Gelt Lower 1 (Main)</name>
+	<ExtendedData><SchemaData schemaUrl="#detected_dams_check_on_GEP">
+		<SimpleData name="OBJECTID">28</SimpleData>
+		<SimpleData name="SCALE">Moderate</SimpleData>
+		<SimpleData name="LAKE">Small</SimpleData>
+		<SimpleData name="HAZARD">Moderate</SimpleData>
+		<SimpleData name="NZTM_E">1624770</SimpleData>
+		<SimpleData name="NZTM_N">5292480</SimpleData>
+		<SimpleData name="LAT">-42.51965859</SimpleData>
+		<SimpleData name="LONG_">173.30155677</SimpleData>
+		<SimpleData name="OBS_METHOD">Helicopter Recon with GPS</SimpleData>
+		<SimpleData name="LOC_ACCURA">within 200m</SimpleData>
+		<SimpleData name="ORINGINATO">GNS Science/S Cox</SimpleData>
+		<SimpleData name="Formal_Nam">Gelt 200</SimpleData>
+		<SimpleData name="Key_Dam">Y</SimpleData>
+		<SimpleData name="Photo">170407_Gelt_200.jpg</SimpleData>
+		<SimpleData name="Dam_Status">Water is overtopping the dam but it remains stable. Ongoing moderate chance of failure, but no out of river flooding anticipated.</SimpleData>
+		<SimpleData name="src">GNS</SimpleData>
+		<SimpleData name="OBJECTID_1">510</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>173.301556765215,-42.5196585932286</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Hapuku</name>
+	<ExtendedData><SchemaData schemaUrl="#detected_dams_check_on_GEP">
+		<SimpleData name="OBJECTID">34</SimpleData>
+		<SimpleData name="SCALE">Large</SimpleData>
+		<SimpleData name="LAKE">Small</SimpleData>
+		<SimpleData name="HAZARD">Moderate</SimpleData>
+		<SimpleData name="NZTM_E">1655360</SimpleData>
+		<SimpleData name="NZTM_N">5322940</SimpleData>
+		<SimpleData name="LAT">-42.24376775</SimpleData>
+		<SimpleData name="LONG_">173.6710224</SimpleData>
+		<SimpleData name="OBS_METHOD">Helicopter Recon with GPS</SimpleData>
+		<SimpleData name="LOC_ACCURA">within 200m</SimpleData>
+		<SimpleData name="ORINGINATO">GNS Science/S Cox</SimpleData>
+		<SimpleData name="Formal_Nam">Hapuku 740</SimpleData>
+		<SimpleData name="Key_Dam">Y</SimpleData>
+		<SimpleData name="Photo">170407_Hapuku_740.jpg</SimpleData>
+		<SimpleData name="Dam_Status">Dam has overtopped and scoured a significant channel that has reduced the risk of major dam failure. A large lake still remains and the outflow channel is expected to continue to degrade in a relatively controlled fashion.</SimpleData>
+		<SimpleData name="src">GNS</SimpleData>
+		<SimpleData name="OBJECTID_1">516</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>173.671022403536,-42.2437677524613</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Lower Leader</name>
+	<ExtendedData><SchemaData schemaUrl="#detected_dams_check_on_GEP">
+		<SimpleData name="OBJECTID">46</SimpleData>
+		<SimpleData name="SCALE">Large</SimpleData>
+		<SimpleData name="LAKE">Large</SimpleData>
+		<SimpleData name="HAZARD">Moderate</SimpleData>
+		<SimpleData name="NZTM_E">1617870</SimpleData>
+		<SimpleData name="NZTM_N">5284800</SimpleData>
+		<SimpleData name="LAT">-42.58901284</SimpleData>
+		<SimpleData name="LONG_">173.21779534</SimpleData>
+		<SimpleData name="OBS_METHOD">Helicopter Recon with GPS</SimpleData>
+		<SimpleData name="LOC_ACCURA">within 200m</SimpleData>
+		<SimpleData name="ORINGINATO">GNS Science/S Cox</SimpleData>
+		<SimpleData name="Formal_Nam">Leader 220</SimpleData>
+		<SimpleData name="Key_Dam">Y</SimpleData>
+		<SimpleData name="Photo">170407_Leader_220.jpg</SimpleData>
+		<SimpleData name="Dam_Status">Main dam crest has eroded and the lake level dropped approx. 3 m from peak. Water overtopping new outlet which has been stabilised by landowners. Moderate chance of further failure, but no out of river flooding anticipated.</SimpleData>
+		<SimpleData name="src">GNS</SimpleData>
+		<SimpleData name="OBJECTID_1">528</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>173.217795338613,-42.589012841618</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#detected_dams_check_on_GEP">
+		<SimpleData name="OBJECTID">52</SimpleData>
+		<SimpleData name="SCALE">Large</SimpleData>
+		<SimpleData name="LAKE">Small</SimpleData>
+		<SimpleData name="HAZARD">Lower</SimpleData>
+		<SimpleData name="NZTM_N">5288270</SimpleData>
+		<SimpleData name="LAT">-42.5576624</SimpleData>
+		<SimpleData name="LONG_">173.26543837</SimpleData>
+		<SimpleData name="OBS_METHOD">Helicopter Recon with GPS</SimpleData>
+		<SimpleData name="LOC_ACCURA">within 200m</SimpleData>
+		<SimpleData name="ORINGINATO">GNS Science/S Cox</SimpleData>
+		<SimpleData name="Formal_Nam">Leader Left Trib 260</SimpleData>
+		<SimpleData name="Key_Dam">Y</SimpleData>
+		<SimpleData name="Photo">170407_Leader_Left_Trib_260.jpg</SimpleData>
+		<SimpleData name="Dam_Status">Medium sized lake is overtopping but appears stable. Moderate chance of failure, but no out of river flooding anticipated.</SimpleData>
+		<SimpleData name="src">GNS</SimpleData>
+		<SimpleData name="OBJECTID_1">534</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>173.265438367573,-42.557662402658</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Linton 340</name>
+	<ExtendedData><SchemaData schemaUrl="#detected_dams_check_on_GEP">
+		<SimpleData name="OBJECTID">58</SimpleData>
+		<SimpleData name="SCALE">Moderate</SimpleData>
+		<SimpleData name="LAKE">Small</SimpleData>
+		<SimpleData name="HAZARD">High</SimpleData>
+		<SimpleData name="NZTM_E">1638390</SimpleData>
+		<SimpleData name="NZTM_N">5311330</SimpleData>
+		<SimpleData name="LAT">-42.34934519</SimpleData>
+		<SimpleData name="LONG_">173.46610632</SimpleData>
+		<SimpleData name="OBS_METHOD">Helicopter Recon with GPS</SimpleData>
+		<SimpleData name="LOC_ACCURA">within 200m</SimpleData>
+		<SimpleData name="ORINGINATO">GNS Science/S Cox</SimpleData>
+		<SimpleData name="Formal_Nam">Linton 340</SimpleData>
+		<SimpleData name="Key_Dam">Y</SimpleData>
+		<SimpleData name="Photo">170407_Linton_340.jpg</SimpleData>
+		<SimpleData name="Dam_Status">Dam has overtopped and scoured a significant channel through the toe of the landslide. Hazard is significantly minimised.</SimpleData>
+		<SimpleData name="src">GNS</SimpleData>
+		<SimpleData name="OBJECTID_1">540</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>173.466106321953,-42.349345194728</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Stanton 1 (Main)</name>
+	<ExtendedData><SchemaData schemaUrl="#detected_dams_check_on_GEP">
+		<SimpleData name="OBJECTID">81</SimpleData>
+		<SimpleData name="SCALE">Large</SimpleData>
+		<SimpleData name="LAKE">Moderate</SimpleData>
+		<SimpleData name="HAZARD">Moderate</SimpleData>
+		<SimpleData name="NZTM_E">1613320</SimpleData>
+		<SimpleData name="NZTM_N">5283870</SimpleData>
+		<SimpleData name="LAT">-42.59748013</SimpleData>
+		<SimpleData name="LONG_">173.16236301</SimpleData>
+		<SimpleData name="OBS_METHOD">Helicopter Recon with GPS</SimpleData>
+		<SimpleData name="LOC_ACCURA">within 200m</SimpleData>
+		<SimpleData name="ORINGINATO">GNS Science/S Cox</SimpleData>
+		<SimpleData name="Formal_Nam">Stanton 200</SimpleData>
+		<SimpleData name="Key_Dam">Y</SimpleData>
+		<SimpleData name="Photo">170407_Stanton_200.jpg</SimpleData>
+		<SimpleData name="Dam_Status">Dam has overtopped and scoured a significant channel through the landslide. A small lake remains but the hazard is significantly minimised.</SimpleData>
+		<SimpleData name="src">GNS</SimpleData>
+		<SimpleData name="OBJECTID_1">563</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>173.162363005395,-42.5974801282854</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Campbell 1</name>
+	<ExtendedData><SchemaData schemaUrl="#detected_dams_check_on_GEP">
+		<SimpleData name="OBJECTID">5</SimpleData>
+		<SimpleData name="SCALE">Small</SimpleData>
+		<SimpleData name="LAKE">Small</SimpleData>
+		<SimpleData name="HAZARD">Unlikely</SimpleData>
+		<SimpleData name="NZTM_E">1622500</SimpleData>
+		<SimpleData name="NZTM_N">5297210</SimpleData>
+		<SimpleData name="LAT">-42.47713064</SimpleData>
+		<SimpleData name="LONG_">173.27373563</SimpleData>
+		<SimpleData name="OBS_METHOD">Helicopter Recon with GPS</SimpleData>
+		<SimpleData name="LOC_ACCURA">within 200m</SimpleData>
+		<SimpleData name="ORINGINATO">GNS Science/S Cox</SimpleData>
+		<SimpleData name="src">GNS</SimpleData>
+		<SimpleData name="OBJECTID_1">487</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>173.273735627601,-42.4771306434718</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Charwell left 4</name>
+	<ExtendedData><SchemaData schemaUrl="#detected_dams_check_on_GEP">
+		<SimpleData name="OBJECTID">10</SimpleData>
+		<SimpleData name="SCALE">Moderate</SimpleData>
+		<SimpleData name="LAKE">Small</SimpleData>
+		<SimpleData name="HAZARD">Lower</SimpleData>
+		<SimpleData name="NZTM_E">1628618.3846</SimpleData>
+		<SimpleData name="NZTM_N">5308736.985</SimpleData>
+		<SimpleData name="LAT">-42.37311861</SimpleData>
+		<SimpleData name="LONG_">173.34759692</SimpleData>
+		<SimpleData name="OBS_METHOD">Helicopter Recon with GPS</SimpleData>
+		<SimpleData name="LOC_ACCURA">within 200m</SimpleData>
+		<SimpleData name="ORINGINATO">GNS Science/S Cox</SimpleData>
+		<SimpleData name="src">GNS</SimpleData>
+		<SimpleData name="OBJECTID_1">492</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>173.347596919405,-42.3731186139763</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Conway at Ferniehurst</name>
+	<ExtendedData><SchemaData schemaUrl="#detected_dams_check_on_GEP">
+		<SimpleData name="OBJECTID">14</SimpleData>
+		<SimpleData name="SCALE">Large</SimpleData>
+		<SimpleData name="LAKE">Moderate</SimpleData>
+		<SimpleData name="HAZARD">Lower</SimpleData>
+		<SimpleData name="NZTM_E">1626820</SimpleData>
+		<SimpleData name="NZTM_N">5284230</SimpleData>
+		<SimpleData name="LAT">-42.59388676</SimpleData>
+		<SimpleData name="LONG_">173.32690121</SimpleData>
+		<SimpleData name="OBS_METHOD">Helicopter Recon with GPS</SimpleData>
+		<SimpleData name="LOC_ACCURA">within 200m</SimpleData>
+		<SimpleData name="ORINGINATO">GNS Science/S Cox</SimpleData>
+		<SimpleData name="Key_Dam">N</SimpleData>
+		<SimpleData name="src">GNS</SimpleData>
+		<SimpleData name="OBJECTID_1">496</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>173.326901209076,-42.5938867652187</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Conway Middle Gorge</name>
+	<ExtendedData><SchemaData schemaUrl="#detected_dams_check_on_GEP">
+		<SimpleData name="OBJECTID">15</SimpleData>
+		<SimpleData name="SCALE">Small</SimpleData>
+		<SimpleData name="LAKE">Small</SimpleData>
+		<SimpleData name="HAZARD">Unlikely</SimpleData>
+		<SimpleData name="NZTM_E">1622670</SimpleData>
+		<SimpleData name="NZTM_N">5297140</SimpleData>
+		<SimpleData name="LAT">-42.47775609</SimpleData>
+		<SimpleData name="LONG_">173.2758066</SimpleData>
+		<SimpleData name="OBS_METHOD">Helicopter Recon with GPS</SimpleData>
+		<SimpleData name="LOC_ACCURA">Within 200m</SimpleData>
+		<SimpleData name="ORINGINATO">GNS Science/S Cox</SimpleData>
+		<SimpleData name="src">GNS</SimpleData>
+		<SimpleData name="OBJECTID_1">497</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>173.275806597507,-42.4777560921266</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Lottery 1</name>
+	<ExtendedData><SchemaData schemaUrl="#detected_dams_check_on_GEP">
+		<SimpleData name="OBJECTID">22</SimpleData>
+		<SimpleData name="SCALE">Small</SimpleData>
+		<SimpleData name="LAKE">Small</SimpleData>
+		<SimpleData name="HAZARD">Moderate</SimpleData>
+		<SimpleData name="NZTM_E">1609320</SimpleData>
+		<SimpleData name="NZTM_N">5297800</SimpleData>
+		<SimpleData name="LAT">-42.47208795</SimpleData>
+		<SimpleData name="LONG_">173.11337831</SimpleData>
+		<SimpleData name="OBS_METHOD">Helicopter Recon with GPS</SimpleData>
+		<SimpleData name="LOC_ACCURA">within 200m</SimpleData>
+		<SimpleData name="ORINGINATO">GNS Science/S Cox</SimpleData>
+		<SimpleData name="src">GNS</SimpleData>
+		<SimpleData name="OBJECTID_1">504</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>173.113025297128,-42.471950930451</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Lottery 2</name>
+	<ExtendedData><SchemaData schemaUrl="#detected_dams_check_on_GEP">
+		<SimpleData name="OBJECTID">23</SimpleData>
+		<SimpleData name="SCALE">Small</SimpleData>
+		<SimpleData name="LAKE">Small</SimpleData>
+		<SimpleData name="HAZARD">Moderate</SimpleData>
+		<SimpleData name="NZTM_E">1609430</SimpleData>
+		<SimpleData name="NZTM_N">5297970</SimpleData>
+		<SimpleData name="LAT">-42.47055562</SimpleData>
+		<SimpleData name="LONG_">173.11471367</SimpleData>
+		<SimpleData name="OBS_METHOD">Helicopter Recon with GPS</SimpleData>
+		<SimpleData name="LOC_ACCURA">within 200m</SimpleData>
+		<SimpleData name="ORINGINATO">GNS Science/S Cox</SimpleData>
+		<SimpleData name="src">GNS</SimpleData>
+		<SimpleData name="OBJECTID_1">505</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>173.114713667182,-42.4705556170772</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Happy Valley 1</name>
+	<ExtendedData><SchemaData schemaUrl="#detected_dams_check_on_GEP">
+		<SimpleData name="OBJECTID">33</SimpleData>
+		<SimpleData name="SCALE">Moderate</SimpleData>
+		<SimpleData name="LAKE">Small</SimpleData>
+		<SimpleData name="HAZARD">Unlikely</SimpleData>
+		<SimpleData name="NZTM_E">1664960</SimpleData>
+		<SimpleData name="NZTM_N">5329680</SimpleData>
+		<SimpleData name="LAT">-42.18233107</SimpleData>
+		<SimpleData name="LONG_">173.78662124</SimpleData>
+		<SimpleData name="OBS_METHOD">Helicopter Recon with GPS</SimpleData>
+		<SimpleData name="LOC_ACCURA">within 200m</SimpleData>
+		<SimpleData name="ORINGINATO">GNS Science/S Cox</SimpleData>
+		<SimpleData name="Key_Dam">N</SimpleData>
+		<SimpleData name="src">GNS</SimpleData>
+		<SimpleData name="OBJECTID_1">515</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>173.78662124134,-42.1823310666382</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Jam 600</name>
+	<ExtendedData><SchemaData schemaUrl="#detected_dams_check_on_GEP">
+		<SimpleData name="OBJECTID">35</SimpleData>
+		<SimpleData name="SCALE">Small</SimpleData>
+		<SimpleData name="LAKE">Small</SimpleData>
+		<SimpleData name="HAZARD">Unlikely</SimpleData>
+		<SimpleData name="NZTM_E">1658100.3061</SimpleData>
+		<SimpleData name="NZTM_N">5337905.1067</SimpleData>
+		<SimpleData name="LAT">-42.10879722</SimpleData>
+		<SimpleData name="LONG_">173.70274174</SimpleData>
+		<SimpleData name="OBS_METHOD">Helicopter Recon with GPS</SimpleData>
+		<SimpleData name="LOC_ACCURA">within 200m</SimpleData>
+		<SimpleData name="ORINGINATO">GNS Science/S Cox</SimpleData>
+		<SimpleData name="Key_Dam">N</SimpleData>
+		<SimpleData name="src">GNS</SimpleData>
+		<SimpleData name="OBJECTID_1">517</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>173.702741739555,-42.1087972194939</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Jordan Right</name>
+	<ExtendedData><SchemaData schemaUrl="#detected_dams_check_on_GEP">
+		<SimpleData name="OBJECTID">37</SimpleData>
+		<SimpleData name="SCALE">Small</SimpleData>
+		<SimpleData name="LAKE">Small</SimpleData>
+		<SimpleData name="HAZARD">Unlikely</SimpleData>
+		<SimpleData name="NZTM_E">1659010</SimpleData>
+		<SimpleData name="NZTM_N">5325260</SimpleData>
+		<SimpleData name="LAT">-42.22260741</SimpleData>
+		<SimpleData name="LONG_">173.71502519</SimpleData>
+		<SimpleData name="OBS_METHOD">Helicopter Recon with GPS</SimpleData>
+		<SimpleData name="LOC_ACCURA">within 200m</SimpleData>
+		<SimpleData name="ORINGINATO">GNS Science/S Cox</SimpleData>
+		<SimpleData name="Key_Dam">N</SimpleData>
+		<SimpleData name="src">GNS</SimpleData>
+		<SimpleData name="OBJECTID_1">519</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>173.715025194502,-42.2226074156437</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Jordan Left</name>
+	<ExtendedData><SchemaData schemaUrl="#detected_dams_check_on_GEP">
+		<SimpleData name="OBJECTID">38</SimpleData>
+		<SimpleData name="SCALE">Moderate</SimpleData>
+		<SimpleData name="LAKE">Small</SimpleData>
+		<SimpleData name="HAZARD">Moderate</SimpleData>
+		<SimpleData name="NZTM_E">1660070</SimpleData>
+		<SimpleData name="NZTM_N">5325410</SimpleData>
+		<SimpleData name="LAT">-42.2211758</SimpleData>
+		<SimpleData name="LONG_">173.72785272</SimpleData>
+		<SimpleData name="OBS_METHOD">Helicopter Recon with GPS</SimpleData>
+		<SimpleData name="LOC_ACCURA">within 200m</SimpleData>
+		<SimpleData name="ORINGINATO">GNS Science/S Cox</SimpleData>
+		<SimpleData name="Key_Dam">N</SimpleData>
+		<SimpleData name="src">GNS</SimpleData>
+		<SimpleData name="OBJECTID_1">520</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>173.727852721817,-42.2211757977408</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Kahutara</name>
+	<ExtendedData><SchemaData schemaUrl="#detected_dams_check_on_GEP">
+		<SimpleData name="OBJECTID">40</SimpleData>
+		<SimpleData name="SCALE">Large</SimpleData>
+		<SimpleData name="LAKE">Small</SimpleData>
+		<SimpleData name="HAZARD">Lower</SimpleData>
+		<SimpleData name="NZTM_E">1634150</SimpleData>
+		<SimpleData name="NZTM_N">5311150</SimpleData>
+		<SimpleData name="LAT">-42.35116396</SimpleData>
+		<SimpleData name="LONG_">173.41463905</SimpleData>
+		<SimpleData name="OBS_METHOD">Helicopter Recon with GPS</SimpleData>
+		<SimpleData name="LOC_ACCURA">within 200m</SimpleData>
+		<SimpleData name="ORINGINATO">GNS Science/S Cox</SimpleData>
+		<SimpleData name="Key_Dam">N</SimpleData>
+		<SimpleData name="src">GNS</SimpleData>
+		<SimpleData name="OBJECTID_1">522</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>173.414639053317,-42.351163962001</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Upper Kowhai Central 1</name>
+	<ExtendedData><SchemaData schemaUrl="#detected_dams_check_on_GEP">
+		<SimpleData name="OBJECTID">41</SimpleData>
+		<SimpleData name="SCALE">Moderate</SimpleData>
+		<SimpleData name="LAKE">Small</SimpleData>
+		<SimpleData name="HAZARD">Moderate</SimpleData>
+		<SimpleData name="NZTM_E">1649540</SimpleData>
+		<SimpleData name="NZTM_N">5319350</SimpleData>
+		<SimpleData name="LAT">-42.27648944</SimpleData>
+		<SimpleData name="LONG_">173.6007886</SimpleData>
+		<SimpleData name="OBS_METHOD">Helicopter Recon with GPS</SimpleData>
+		<SimpleData name="LOC_ACCURA">within 200m</SimpleData>
+		<SimpleData name="ORINGINATO">GNS Science/S Cox</SimpleData>
+		<SimpleData name="src">GNS</SimpleData>
+		<SimpleData name="OBJECTID_1">523</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>173.600788602968,-42.2764894409542</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Upper Kowhai Central 2</name>
+	<ExtendedData><SchemaData schemaUrl="#detected_dams_check_on_GEP">
+		<SimpleData name="OBJECTID">42</SimpleData>
+		<SimpleData name="SCALE">Moderate</SimpleData>
+		<SimpleData name="LAKE">Small</SimpleData>
+		<SimpleData name="HAZARD">Moderate</SimpleData>
+		<SimpleData name="NZTM_E">1649620</SimpleData>
+		<SimpleData name="NZTM_N">5320060</SimpleData>
+		<SimpleData name="LAT">-42.27009028</SimpleData>
+		<SimpleData name="LONG_">173.60169791</SimpleData>
+		<SimpleData name="OBS_METHOD">Helicopter Recon with GPS</SimpleData>
+		<SimpleData name="LOC_ACCURA">within 200m</SimpleData>
+		<SimpleData name="ORINGINATO">GNS Science/S Cox</SimpleData>
+		<SimpleData name="src">GNS</SimpleData>
+		<SimpleData name="OBJECTID_1">524</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>173.601697914858,-42.2700902795705</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Leader Left Trib 280</name>
+	<ExtendedData><SchemaData schemaUrl="#detected_dams_check_on_GEP">
+		<SimpleData name="OBJECTID">53</SimpleData>
+		<SimpleData name="SCALE">Large</SimpleData>
+		<SimpleData name="LAKE">Small</SimpleData>
+		<SimpleData name="HAZARD">Lower</SimpleData>
+		<SimpleData name="NZTM_E">1621240</SimpleData>
+		<SimpleData name="NZTM_N">5288330</SimpleData>
+		<SimpleData name="LAT">-42.55713738</SimpleData>
+		<SimpleData name="LONG_">173.25873629</SimpleData>
+		<SimpleData name="OBS_METHOD">Helicopter Recon with GPS</SimpleData>
+		<SimpleData name="LOC_ACCURA">within 200m</SimpleData>
+		<SimpleData name="ORINGINATO">GNS Science/S Cox</SimpleData>
+		<SimpleData name="src">GNS</SimpleData>
+		<SimpleData name="OBJECTID_1">535</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>173.258736289715,-42.5571373846814</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#detected_dams_check_on_GEP">
+		<SimpleData name="OBJECTID">54</SimpleData>
+		<SimpleData name="SCALE">Large</SimpleData>
+		<SimpleData name="LAKE">Small</SimpleData>
+		<SimpleData name="HAZARD">Lower</SimpleData>
+		<SimpleData name="NZTM_N">5288660</SimpleData>
+		<SimpleData name="LAT">-42.55415664</SimpleData>
+		<SimpleData name="LONG_">173.26262189</SimpleData>
+		<SimpleData name="OBS_METHOD">Helicopter Recon with GPS</SimpleData>
+		<SimpleData name="LOC_ACCURA">within 200m</SimpleData>
+		<SimpleData name="ORINGINATO">GNS Science/S Cox</SimpleData>
+		<SimpleData name="src">GNS</SimpleData>
+		<SimpleData name="OBJECTID_1">536</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>173.262621887295,-42.5541566367192</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Mason</name>
+	<ExtendedData><SchemaData schemaUrl="#detected_dams_check_on_GEP">
+		<SimpleData name="OBJECTID">61</SimpleData>
+		<SimpleData name="SCALE">Small</SimpleData>
+		<SimpleData name="LAKE">Small</SimpleData>
+		<SimpleData name="HAZARD">Unlikely</SimpleData>
+		<SimpleData name="NZTM_E">1611350</SimpleData>
+		<SimpleData name="NZTM_N">5290410</SimpleData>
+		<SimpleData name="LAT">-42.53861406</SimpleData>
+		<SimpleData name="LONG_">173.13821984</SimpleData>
+		<SimpleData name="OBS_METHOD">Helicopter Recon with GPS</SimpleData>
+		<SimpleData name="LOC_ACCURA">within 200m</SimpleData>
+		<SimpleData name="ORINGINATO">GNS Science/S Cox</SimpleData>
+		<SimpleData name="src">GNS</SimpleData>
+		<SimpleData name="OBJECTID_1">543</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>173.136850460984,-42.538576757167</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Upper Kowhai Right 1</name>
+	<ExtendedData><SchemaData schemaUrl="#detected_dams_check_on_GEP">
+		<SimpleData name="OBJECTID">62</SimpleData>
+		<SimpleData name="SCALE">Small</SimpleData>
+		<SimpleData name="LAKE">Small</SimpleData>
+		<SimpleData name="HAZARD">Moderate</SimpleData>
+		<SimpleData name="NZTM_E">1648050</SimpleData>
+		<SimpleData name="NZTM_N">5316990</SimpleData>
+		<SimpleData name="LAT">-42.29783624</SimpleData>
+		<SimpleData name="LONG_">173.5829157</SimpleData>
+		<SimpleData name="OBS_METHOD">Helicopter Recon with GPS</SimpleData>
+		<SimpleData name="LOC_ACCURA">within 200m</SimpleData>
+		<SimpleData name="ORINGINATO">GNS Science/S Cox</SimpleData>
+		<SimpleData name="src">GNS</SimpleData>
+		<SimpleData name="OBJECTID_1">544</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>173.582915697891,-42.2978362398389</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Upper Kowhai Right 3</name>
+	<ExtendedData><SchemaData schemaUrl="#detected_dams_check_on_GEP">
+		<SimpleData name="OBJECTID">64</SimpleData>
+		<SimpleData name="SCALE">Small</SimpleData>
+		<SimpleData name="LAKE">Small</SimpleData>
+		<SimpleData name="HAZARD">Moderate</SimpleData>
+		<SimpleData name="NZTM_E">1648190</SimpleData>
+		<SimpleData name="NZTM_N">5318270</SimpleData>
+		<SimpleData name="LAT">-42.28630025</SimpleData>
+		<SimpleData name="LONG_">173.58450742</SimpleData>
+		<SimpleData name="OBS_METHOD">Helicopter Recon with GPS</SimpleData>
+		<SimpleData name="LOC_ACCURA">within 200m</SimpleData>
+		<SimpleData name="ORINGINATO">GNS Science/S Cox</SimpleData>
+		<SimpleData name="src">GNS</SimpleData>
+		<SimpleData name="OBJECTID_1">546</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>173.584507418122,-42.2863002499074</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Happy Valley 3</name>
+	<ExtendedData><SchemaData schemaUrl="#detected_dams_check_on_GEP">
+		<SimpleData name="OBJECTID">76</SimpleData>
+		<SimpleData name="SCALE">Small</SimpleData>
+		<SimpleData name="LAKE">Small</SimpleData>
+		<SimpleData name="HAZARD">Unlikely</SimpleData>
+		<SimpleData name="NZTM_E">1660960</SimpleData>
+		<SimpleData name="NZTM_N">5331110</SimpleData>
+		<SimpleData name="LAT">-42.16977489</SimpleData>
+		<SimpleData name="LONG_">173.73803824</SimpleData>
+		<SimpleData name="OBS_METHOD">Helicopter Recon with GPS</SimpleData>
+		<SimpleData name="LOC_ACCURA">within 200m</SimpleData>
+		<SimpleData name="ORINGINATO">GNS Science/S Cox</SimpleData>
+		<SimpleData name="Key_Dam">N</SimpleData>
+		<SimpleData name="src">GNS</SimpleData>
+		<SimpleData name="OBJECTID_1">558</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>173.738038235369,-42.1697748859806</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Happy Valley 2</name>
+	<ExtendedData><SchemaData schemaUrl="#detected_dams_check_on_GEP">
+		<SimpleData name="OBJECTID">77</SimpleData>
+		<SimpleData name="SCALE">Small</SimpleData>
+		<SimpleData name="LAKE">Small</SimpleData>
+		<SimpleData name="HAZARD">Unlikely</SimpleData>
+		<SimpleData name="NZTM_E">1661610</SimpleData>
+		<SimpleData name="NZTM_N">5331160</SimpleData>
+		<SimpleData name="LAT">-42.16927371</SimpleData>
+		<SimpleData name="LONG_">173.7459018</SimpleData>
+		<SimpleData name="OBS_METHOD">Helicopter Recon with GPS</SimpleData>
+		<SimpleData name="LOC_ACCURA">within 200m</SimpleData>
+		<SimpleData name="ORINGINATO">GNS Science/S Cox</SimpleData>
+		<SimpleData name="Key_Dam">N</SimpleData>
+		<SimpleData name="src">GNS</SimpleData>
+		<SimpleData name="OBJECTID_1">559</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>173.745901804751,-42.1692737117169</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Stanton 3</name>
+	<ExtendedData><SchemaData schemaUrl="#detected_dams_check_on_GEP">
+		<SimpleData name="OBJECTID">83</SimpleData>
+		<SimpleData name="SCALE">Small</SimpleData>
+		<SimpleData name="LAKE">Small</SimpleData>
+		<SimpleData name="HAZARD">Unlikely</SimpleData>
+		<SimpleData name="NZTM_E">1612640</SimpleData>
+		<SimpleData name="NZTM_N">5284960</SimpleData>
+		<SimpleData name="LAT">-42.58767536</SimpleData>
+		<SimpleData name="LONG_">173.15405006</SimpleData>
+		<SimpleData name="OBS_METHOD">Helicopter Recon with GPS</SimpleData>
+		<SimpleData name="LOC_ACCURA">within 200m</SimpleData>
+		<SimpleData name="ORINGINATO">GNS Science/S Cox</SimpleData>
+		<SimpleData name="src">GNS</SimpleData>
+		<SimpleData name="OBJECTID_1">565</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>173.154050056623,-42.5876753599715</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Towy 1 (Main)</name>
+	<ExtendedData><SchemaData schemaUrl="#detected_dams_check_on_GEP">
+		<SimpleData name="OBJECTID">99</SimpleData>
+		<SimpleData name="SCALE">Moderate</SimpleData>
+		<SimpleData name="LAKE">Moderate</SimpleData>
+		<SimpleData name="HAZARD">High</SimpleData>
+		<SimpleData name="NZTM_E">1618370</SimpleData>
+		<SimpleData name="NZTM_N">5301190</SimpleData>
+		<SimpleData name="LAT">-42.44139625</SimpleData>
+		<SimpleData name="LONG_">173.22336292</SimpleData>
+		<SimpleData name="OBS_METHOD">Helicopter Recon with GPS</SimpleData>
+		<SimpleData name="LOC_ACCURA">within 200m</SimpleData>
+		<SimpleData name="ORINGINATO">GNS Science/S Cox</SimpleData>
+		<SimpleData name="Key_Dam">N</SimpleData>
+		<SimpleData name="Dam_Status">Dam has breached. Lake level has dropped significantly, with only a small amount of water remaining.</SimpleData>
+		<SimpleData name="src">GNS</SimpleData>
+		<SimpleData name="OBJECTID_1">581</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>173.221716913682,-42.4398982567288</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Clarence River 310 (breached)</name>
+	<ExtendedData><SchemaData schemaUrl="#detected_dams_check_on_GEP">
+		<SimpleData name="OBJECTID">109</SimpleData>
+		<SimpleData name="SCALE">Small</SimpleData>
+		<SimpleData name="LAKE">Large</SimpleData>
+		<SimpleData name="HAZARD">Lower</SimpleData>
+		<SimpleData name="NZTM_E">1657630</SimpleData>
+		<SimpleData name="NZTM_N">5341940</SimpleData>
+		<SimpleData name="LAT">-42.07249424</SimpleData>
+		<SimpleData name="LONG_">173.6966559</SimpleData>
+		<SimpleData name="OBS_METHOD">Helicopter Recon with GPS</SimpleData>
+		<SimpleData name="LOC_ACCURA">Within 500m</SimpleData>
+		<SimpleData name="ORINGINATO">GNS Science/D Townsend</SimpleData>
+		<SimpleData name="Key_Dam">N</SimpleData>
+		<SimpleData name="Dam_Status">Breached about 18/11/2016. Lake ~ 500m long.</SimpleData>
+		<SimpleData name="src">GNS</SimpleData>
+		<SimpleData name="OBJECTID_1">591</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>173.696655897661,-42.0724942402194</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Dee Stream 355</name>
+	<ExtendedData><SchemaData schemaUrl="#detected_dams_check_on_GEP">
+		<SimpleData name="OBJECTID">111</SimpleData>
+		<SimpleData name="SCALE">Large</SimpleData>
+		<SimpleData name="LAKE">Small</SimpleData>
+		<SimpleData name="HAZARD">Moderate</SimpleData>
+		<SimpleData name="NZTM_E">1662890</SimpleData>
+		<SimpleData name="NZTM_N">5350600</SimpleData>
+		<SimpleData name="LAT">-41.99410024</SimpleData>
+		<SimpleData name="LONG_">173.75930695</SimpleData>
+		<SimpleData name="OBS_METHOD">Helicopter Recon with GPS</SimpleData>
+		<SimpleData name="LOC_ACCURA">Within 500m</SimpleData>
+		<SimpleData name="ORINGINATO">GNS Science/D Townsend</SimpleData>
+		<SimpleData name="Key_Dam">N</SimpleData>
+		<SimpleData name="Dam_Status">Long run-out slide onto wide aggraded riverbed has formed small lake.</SimpleData>
+		<SimpleData name="src">GNS</SimpleData>
+		<SimpleData name="OBJECTID_1">593</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>173.759306946619,-41.9941002436714</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Dee Stream tributary 380</name>
+	<ExtendedData><SchemaData schemaUrl="#detected_dams_check_on_GEP">
+		<SimpleData name="OBJECTID">113</SimpleData>
+		<SimpleData name="SCALE">Large</SimpleData>
+		<SimpleData name="LAKE">Small</SimpleData>
+		<SimpleData name="HAZARD">Lower</SimpleData>
+		<SimpleData name="NZTM_E">1662830</SimpleData>
+		<SimpleData name="NZTM_N">5350710</SimpleData>
+		<SimpleData name="LAT">-41.99311438</SimpleData>
+		<SimpleData name="LONG_">173.75857083</SimpleData>
+		<SimpleData name="OBS_METHOD">Helicopter Recon with GPS</SimpleData>
+		<SimpleData name="LOC_ACCURA">Within 500m</SimpleData>
+		<SimpleData name="ORINGINATO">GNS Science/D Townsend</SimpleData>
+		<SimpleData name="Key_Dam">N</SimpleData>
+		<SimpleData name="src">GNS</SimpleData>
+		<SimpleData name="OBJECTID_1">595</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>173.758570829881,-41.9931143852018</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Happy Valley 310</name>
+	<ExtendedData><SchemaData schemaUrl="#detected_dams_check_on_GEP">
+		<SimpleData name="OBJECTID">115</SimpleData>
+		<SimpleData name="SCALE">Small</SimpleData>
+		<SimpleData name="LAKE">Small</SimpleData>
+		<SimpleData name="HAZARD">Unlikely</SimpleData>
+		<SimpleData name="NZTM_E">1665950</SimpleData>
+		<SimpleData name="NZTM_N">5330480</SimpleData>
+		<SimpleData name="LAT">-42.17504383</SimpleData>
+		<SimpleData name="LONG_">173.7985177</SimpleData>
+		<SimpleData name="OBS_METHOD">Helicopter Recon with GPS</SimpleData>
+		<SimpleData name="LOC_ACCURA">Within 500m</SimpleData>
+		<SimpleData name="ORINGINATO">GNS Science/D Townsend</SimpleData>
+		<SimpleData name="Key_Dam">N</SimpleData>
+		<SimpleData name="src">GNS</SimpleData>
+		<SimpleData name="OBJECTID_1">597</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>173.79851769566,-42.1750438356092</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Mead Stream 400</name>
+	<ExtendedData><SchemaData schemaUrl="#detected_dams_check_on_GEP">
+		<SimpleData name="OBJECTID">122</SimpleData>
+		<SimpleData name="SCALE">Small</SimpleData>
+		<SimpleData name="LAKE">Moderate</SimpleData>
+		<SimpleData name="HAZARD">Lower</SimpleData>
+		<SimpleData name="NZTM_E">1665550</SimpleData>
+		<SimpleData name="NZTM_N">5354440</SimpleData>
+		<SimpleData name="LAT">-41.95930089</SimpleData>
+		<SimpleData name="LONG_">173.79099168</SimpleData>
+		<SimpleData name="OBS_METHOD">Helicopter Recon with GPS</SimpleData>
+		<SimpleData name="LOC_ACCURA">Within 500m</SimpleData>
+		<SimpleData name="ORINGINATO">GNS Science/D Townsend</SimpleData>
+		<SimpleData name="Key_Dam">N</SimpleData>
+		<SimpleData name="Dam_Status">One of several dams in gorge. All are minor; debris is blocky and water can escape around toes.</SimpleData>
+		<SimpleData name="src">GNS</SimpleData>
+		<SimpleData name="OBJECTID_1">604</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>173.790991675971,-41.9593008941577</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Mead Stream 435</name>
+	<ExtendedData><SchemaData schemaUrl="#detected_dams_check_on_GEP">
+		<SimpleData name="OBJECTID">123</SimpleData>
+		<SimpleData name="SCALE">Small</SimpleData>
+		<SimpleData name="LAKE">Large</SimpleData>
+		<SimpleData name="HAZARD">Lower</SimpleData>
+		<SimpleData name="NZTM_E">1665110</SimpleData>
+		<SimpleData name="NZTM_N">5354740</SimpleData>
+		<SimpleData name="LAT">-41.95663558</SimpleData>
+		<SimpleData name="LONG_">173.78564949</SimpleData>
+		<SimpleData name="OBS_METHOD">Helicopter Recon with GPS</SimpleData>
+		<SimpleData name="LOC_ACCURA">Within 500m</SimpleData>
+		<SimpleData name="ORINGINATO">GNS Science/D Townsend</SimpleData>
+		<SimpleData name="Key_Dam">N</SimpleData>
+		<SimpleData name="Dam_Status">One of several dams in gorge. All are minor; debris is blocky and water can escape around toes.</SimpleData>
+		<SimpleData name="src">GNS</SimpleData>
+		<SimpleData name="OBJECTID_1">605</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>173.785649493726,-41.95663558411</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Mead Stream 480</name>
+	<ExtendedData><SchemaData schemaUrl="#detected_dams_check_on_GEP">
+		<SimpleData name="OBJECTID">124</SimpleData>
+		<SimpleData name="SCALE">Small</SimpleData>
+		<SimpleData name="LAKE">Moderate</SimpleData>
+		<SimpleData name="HAZARD">Lower</SimpleData>
+		<SimpleData name="NZTM_E">1664670</SimpleData>
+		<SimpleData name="NZTM_N">5354560</SimpleData>
+		<SimpleData name="LAT">-41.95829285</SimpleData>
+		<SimpleData name="LONG_">173.78036049</SimpleData>
+		<SimpleData name="OBS_METHOD">Helicopter Recon with GPS</SimpleData>
+		<SimpleData name="LOC_ACCURA">Within 500m</SimpleData>
+		<SimpleData name="ORINGINATO">GNS Science/D Townsend</SimpleData>
+		<SimpleData name="Key_Dam">N</SimpleData>
+		<SimpleData name="Dam_Status">One of several dams in gorge. All are minor; debris is blocky and water can escape around toes.</SimpleData>
+		<SimpleData name="src">GNS</SimpleData>
+		<SimpleData name="OBJECTID_1">606</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>173.780360490513,-41.9582928523694</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Medway River Upper</name>
+	<ExtendedData><SchemaData schemaUrl="#detected_dams_check_on_GEP">
+		<SimpleData name="OBJECTID">126</SimpleData>
+		<SimpleData name="SCALE">Moderate</SimpleData>
+		<SimpleData name="LAKE">Moderate</SimpleData>
+		<SimpleData name="HAZARD">High</SimpleData>
+		<SimpleData name="NZTM_E">1666960</SimpleData>
+		<SimpleData name="NZTM_N">5366220</SimpleData>
+		<SimpleData name="LAT">-41.85309268</SimpleData>
+		<SimpleData name="LONG_">173.80666786</SimpleData>
+		<SimpleData name="OBS_METHOD">Helicopter Recon with GPS</SimpleData>
+		<SimpleData name="LOC_ACCURA">Within 500m</SimpleData>
+		<SimpleData name="ORINGINATO">GNS Science/D Townsend</SimpleData>
+		<SimpleData name="Key_Dam">N</SimpleData>
+		<SimpleData name="Dam_Status">Potential for ongoing cliff collapse above entrenched river. No change since 20/11/2016</SimpleData>
+		<SimpleData name="src">GNS</SimpleData>
+		<SimpleData name="OBJECTID_1">608</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>173.806667860444,-41.8530926848866</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Jam 570</name>
+	<ExtendedData><SchemaData schemaUrl="#detected_dams_check_on_GEP">
+		<SimpleData name="OBJECTID">141</SimpleData>
+		<SimpleData name="SCALE">Small</SimpleData>
+		<SimpleData name="LAKE">Small</SimpleData>
+		<SimpleData name="HAZARD">Unlikely</SimpleData>
+		<SimpleData name="NZTM_E">1658275.7252</SimpleData>
+		<SimpleData name="NZTM_N">5338222.6073</SimpleData>
+		<SimpleData name="LAT">-42.10592485</SimpleData>
+		<SimpleData name="LONG_">173.70483166</SimpleData>
+		<SimpleData name="OBS_METHOD">Helicopter Recon with GPS</SimpleData>
+		<SimpleData name="LOC_ACCURA">within 200m</SimpleData>
+		<SimpleData name="ORINGINATO">GNS Science/S Cox</SimpleData>
+		<SimpleData name="Key_Dam">N</SimpleData>
+		<SimpleData name="src">GNS</SimpleData>
+		<SimpleData name="OBJECTID_1">623</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>173.70483165858,-42.1059248546507</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Jam 1000</name>
+	<ExtendedData><SchemaData schemaUrl="#detected_dams_check_on_GEP">
+		<SimpleData name="OBJECTID">143</SimpleData>
+		<SimpleData name="SCALE">Small</SimpleData>
+		<SimpleData name="LAKE">Small</SimpleData>
+		<SimpleData name="HAZARD">Unlikely</SimpleData>
+		<SimpleData name="NZTM_E">1656491.0075</SimpleData>
+		<SimpleData name="NZTM_N">5334726.5566</SimpleData>
+		<SimpleData name="LAT">-42.13754026</SimpleData>
+		<SimpleData name="LONG_">173.68358577</SimpleData>
+		<SimpleData name="OBS_METHOD">Helicopter Recon with GPS</SimpleData>
+		<SimpleData name="LOC_ACCURA">within 200m</SimpleData>
+		<SimpleData name="ORINGINATO">GNS Science/S Cox</SimpleData>
+		<SimpleData name="Key_Dam">N</SimpleData>
+		<SimpleData name="src">GNS</SimpleData>
+		<SimpleData name="OBJECTID_1">625</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>173.683585766389,-42.1375402570334</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Seymour 620</name>
+	<ExtendedData><SchemaData schemaUrl="#detected_dams_check_on_GEP">
+		<SimpleData name="OBJECTID">148</SimpleData>
+		<SimpleData name="SCALE">Moderate</SimpleData>
+		<SimpleData name="LAKE">Small</SimpleData>
+		<SimpleData name="HAZARD">Unlikely</SimpleData>
+		<SimpleData name="NZTM_E">1633310.3921</SimpleData>
+		<SimpleData name="NZTM_N">5323691.2629</SimpleData>
+		<SimpleData name="LAT">-42.23825402</SimpleData>
+		<SimpleData name="LONG_">173.403723</SimpleData>
+		<SimpleData name="OBS_METHOD">Helicopter Recon with GPS</SimpleData>
+		<SimpleData name="LOC_ACCURA">within 200m</SimpleData>
+		<SimpleData name="ORINGINATO">GNS Science/S Cox</SimpleData>
+		<SimpleData name="Key_Dam">N</SimpleData>
+		<SimpleData name="src">GNS</SimpleData>
+		<SimpleData name="OBJECTID_1">630</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>173.403723001463,-42.2382540229204</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Fidget 660</name>
+	<ExtendedData><SchemaData schemaUrl="#detected_dams_check_on_GEP">
+		<SimpleData name="OBJECTID">150</SimpleData>
+		<SimpleData name="SCALE">Small</SimpleData>
+		<SimpleData name="LAKE">Small</SimpleData>
+		<SimpleData name="HAZARD">Unlikely</SimpleData>
+		<SimpleData name="NZTM_E">1652278.7063</SimpleData>
+		<SimpleData name="NZTM_N">5332988.4481</SimpleData>
+		<SimpleData name="LAT">-42.15348582</SimpleData>
+		<SimpleData name="LONG_">173.63277259</SimpleData>
+		<SimpleData name="OBS_METHOD">Helicopter Recon with GPS</SimpleData>
+		<SimpleData name="LOC_ACCURA">within 200m</SimpleData>
+		<SimpleData name="ORINGINATO">GNS Science/S Cox</SimpleData>
+		<SimpleData name="Key_Dam">N</SimpleData>
+		<SimpleData name="src">GNS</SimpleData>
+		<SimpleData name="OBJECTID_1">632</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>173.632772590403,-42.1534858162123</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#detected_dams_check_on_GEP">
+		<SimpleData name="OBJECTID">0</SimpleData>
+		<SimpleData name="SCALE">Small</SimpleData>
+		<SimpleData name="LAKE">Small</SimpleData>
+		<SimpleData name="HAZARD">Unlikely</SimpleData>
+		<SimpleData name="NZTM_N">0</SimpleData>
+		<SimpleData name="LAT">0</SimpleData>
+		<SimpleData name="OBS_METHOD">Helicopter Recon with GPS</SimpleData>
+		<SimpleData name="ORINGINATO">GNS Science/S Cox</SimpleData>
+		<SimpleData name="src">GNS</SimpleData>
+		<SimpleData name="OBJECTID_1">634</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>173.596288983574,-42.2852300331648</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#detected_dams_check_on_GEP">
+		<SimpleData name="OBJECTID">0</SimpleData>
+		<SimpleData name="SCALE">Small</SimpleData>
+		<SimpleData name="LAKE">Small</SimpleData>
+		<SimpleData name="HAZARD">Unlikely</SimpleData>
+		<SimpleData name="NZTM_N">0</SimpleData>
+		<SimpleData name="LAT">0</SimpleData>
+		<SimpleData name="OBS_METHOD">Helicopter Recon with GPS</SimpleData>
+		<SimpleData name="ORINGINATO">GNS Science/S Cox</SimpleData>
+		<SimpleData name="src">GNS</SimpleData>
+		<SimpleData name="OBJECTID_1">635</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>173.594955281648,-42.2870423008908</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#detected_dams_check_on_GEP">
+		<SimpleData name="OBJECTID">0</SimpleData>
+		<SimpleData name="SCALE">Small</SimpleData>
+		<SimpleData name="LAKE">Small</SimpleData>
+		<SimpleData name="HAZARD">Unlikely</SimpleData>
+		<SimpleData name="NZTM_N">0</SimpleData>
+		<SimpleData name="LAT">0</SimpleData>
+		<SimpleData name="OBS_METHOD">Helicopter Recon with GPS</SimpleData>
+		<SimpleData name="ORINGINATO">GNS Science/S Cox</SimpleData>
+		<SimpleData name="src">GNS</SimpleData>
+		<SimpleData name="OBJECTID_1">636</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>173.592725522827,-42.2883022920135</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#detected_dams_check_on_GEP">
+		<SimpleData name="OBJECTID">0</SimpleData>
+		<SimpleData name="SCALE">Moderate</SimpleData>
+		<SimpleData name="LAKE">Small</SimpleData>
+		<SimpleData name="HAZARD">Lower</SimpleData>
+		<SimpleData name="NZTM_N">0</SimpleData>
+		<SimpleData name="LAT">0</SimpleData>
+		<SimpleData name="LONG_">0</SimpleData>
+		<SimpleData name="OBS_METHOD">Helicopter Recon with GPS</SimpleData>
+		<SimpleData name="LOC_ACCURA">Within 200m</SimpleData>
+		<SimpleData name="ORINGINATO">GNS Science/S Cox</SimpleData>
+		<SimpleData name="src">GNS</SimpleData>
+		<SimpleData name="OBJECTID_1">1033</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>173.355459092425,-42.3957888818666</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#detected_dams_check_on_GEP">
+		<SimpleData name="OBJECTID">160</SimpleData>
+		<SimpleData name="SCALE">Small</SimpleData>
+		<SimpleData name="LAKE">Small</SimpleData>
+		<SimpleData name="HAZARD">Unlikely</SimpleData>
+		<SimpleData name="NZTM_N">0</SimpleData>
+		<SimpleData name="LAT">0</SimpleData>
+		<SimpleData name="LONG_">0</SimpleData>
+		<SimpleData name="OBS_METHOD">Helicopter Recon with GPS</SimpleData>
+		<SimpleData name="LOC_ACCURA">Within 200m</SimpleData>
+		<SimpleData name="ORINGINATO">GNS Science/S Cox</SimpleData>
+		<SimpleData name="src">GNS</SimpleData>
+		<SimpleData name="OBJECTID_1">1046</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>173.576939645936,-42.2844858766602</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#detected_dams_check_on_GEP">
+		<SimpleData name="OBJECTID">164</SimpleData>
+		<SimpleData name="SCALE">Large</SimpleData>
+		<SimpleData name="LAKE">Small</SimpleData>
+		<SimpleData name="HAZARD">Lower</SimpleData>
+		<SimpleData name="NZTM_N">0</SimpleData>
+		<SimpleData name="LAT">0</SimpleData>
+		<SimpleData name="LONG_">0</SimpleData>
+		<SimpleData name="OBS_METHOD">Helicopter Recon with GPS</SimpleData>
+		<SimpleData name="LOC_ACCURA">Within 200m</SimpleData>
+		<SimpleData name="ORINGINATO">GNS Science/B Lyndsell</SimpleData>
+		<SimpleData name="src">GNS</SimpleData>
+		<SimpleData name="OBJECTID_1">1050</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>173.246777553162,-42.5689441856765</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#detected_dams_check_on_GEP">
+		<SimpleData name="OBJECTID">166</SimpleData>
+		<SimpleData name="SCALE">Small</SimpleData>
+		<SimpleData name="LAKE">Small</SimpleData>
+		<SimpleData name="HAZARD">Unlikely</SimpleData>
+		<SimpleData name="NZTM_N">0</SimpleData>
+		<SimpleData name="LAT">0</SimpleData>
+		<SimpleData name="LONG_">0</SimpleData>
+		<SimpleData name="OBS_METHOD">Helicopter Recon with GPS</SimpleData>
+		<SimpleData name="LOC_ACCURA">Within 200m</SimpleData>
+		<SimpleData name="ORINGINATO">GNS Science/S Cox</SimpleData>
+		<SimpleData name="src">GNS</SimpleData>
+		<SimpleData name="OBJECTID_1">1052</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>173.601398450102,-42.2691788130922</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#detected_dams_check_on_GEP">
+		<SimpleData name="OBJECTID">167</SimpleData>
+		<SimpleData name="SCALE">Small</SimpleData>
+		<SimpleData name="LAKE">Small</SimpleData>
+		<SimpleData name="HAZARD">Unlikely</SimpleData>
+		<SimpleData name="NZTM_N">0</SimpleData>
+		<SimpleData name="LAT">0</SimpleData>
+		<SimpleData name="LONG_">0</SimpleData>
+		<SimpleData name="OBS_METHOD">Helicopter Recon with GPS</SimpleData>
+		<SimpleData name="LOC_ACCURA">Within 200m</SimpleData>
+		<SimpleData name="ORINGINATO">GNS Science/S Cox</SimpleData>
+		<SimpleData name="src">GNS</SimpleData>
+		<SimpleData name="OBJECTID_1">1053</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>173.601921505851,-42.2683382965099</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#detected_dams_check_on_GEP">
+		<SimpleData name="OBJECTID">168</SimpleData>
+		<SimpleData name="SCALE">Small</SimpleData>
+		<SimpleData name="LAKE">Small</SimpleData>
+		<SimpleData name="HAZARD">Unlikely</SimpleData>
+		<SimpleData name="NZTM_N">0</SimpleData>
+		<SimpleData name="LAT">0</SimpleData>
+		<SimpleData name="LONG_">0</SimpleData>
+		<SimpleData name="OBS_METHOD">Helicopter Recon with GPS</SimpleData>
+		<SimpleData name="LOC_ACCURA">Within 200m</SimpleData>
+		<SimpleData name="ORINGINATO">GNS Science/S Cox</SimpleData>
+		<SimpleData name="src">GNS</SimpleData>
+		<SimpleData name="OBJECTID_1">1054</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>173.599769055403,-42.2659160261989</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#detected_dams_check_on_GEP">
+		<SimpleData name="OBJECTID">173</SimpleData>
+		<SimpleData name="SCALE">Large</SimpleData>
+		<SimpleData name="LAKE">Small</SimpleData>
+		<SimpleData name="HAZARD">Lower</SimpleData>
+		<SimpleData name="NZTM_N">0</SimpleData>
+		<SimpleData name="LAT">0</SimpleData>
+		<SimpleData name="LONG_">0</SimpleData>
+		<SimpleData name="OBS_METHOD">Helicopter Recon with GPS</SimpleData>
+		<SimpleData name="LOC_ACCURA">Within 200m</SimpleData>
+		<SimpleData name="ORINGINATO">GNS Science/S Cox</SimpleData>
+		<SimpleData name="src">GNS</SimpleData>
+		<SimpleData name="OBJECTID_1">1059</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>173.247385825282,-42.5650392649864</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#detected_dams_check_on_GEP">
+		<SimpleData name="OBJECTID">177</SimpleData>
+		<SimpleData name="SCALE">Small</SimpleData>
+		<SimpleData name="LAKE">Small</SimpleData>
+		<SimpleData name="HAZARD">Unlikely</SimpleData>
+		<SimpleData name="NZTM_N">0</SimpleData>
+		<SimpleData name="LAT">0</SimpleData>
+		<SimpleData name="LONG_">0</SimpleData>
+		<SimpleData name="OBS_METHOD">Helicopter Recon with GPS</SimpleData>
+		<SimpleData name="LOC_ACCURA">Within 200m</SimpleData>
+		<SimpleData name="ORINGINATO">GNS Science/S Cox</SimpleData>
+		<SimpleData name="src">GNS</SimpleData>
+		<SimpleData name="OBJECTID_1">1063</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>173.133895996263,-42.5401743360768</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#detected_dams_check_on_GEP">
+		<SimpleData name="OBJECTID">186</SimpleData>
+		<SimpleData name="SCALE">Small</SimpleData>
+		<SimpleData name="LAKE">Small</SimpleData>
+		<SimpleData name="HAZARD">None</SimpleData>
+		<SimpleData name="NZTM_N">0</SimpleData>
+		<SimpleData name="LAT">0</SimpleData>
+		<SimpleData name="LONG_">0</SimpleData>
+		<SimpleData name="OBS_METHOD">Helicopter Recon with GPS</SimpleData>
+		<SimpleData name="LOC_ACCURA">Within 200m</SimpleData>
+		<SimpleData name="ORINGINATO">GNS Science/S Cox</SimpleData>
+		<SimpleData name="src">GNS</SimpleData>
+		<SimpleData name="OBJECTID_1">1071</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>173.8338462371,-42.1547925979075</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#detected_dams_check_on_GEP">
+		<SimpleData name="OBJECTID">198</SimpleData>
+		<SimpleData name="SCALE">Moderate</SimpleData>
+		<SimpleData name="LAKE">Small</SimpleData>
+		<SimpleData name="HAZARD">Unlikely</SimpleData>
+		<SimpleData name="NZTM_N">0</SimpleData>
+		<SimpleData name="LAT">0</SimpleData>
+		<SimpleData name="LONG_">0</SimpleData>
+		<SimpleData name="OBS_METHOD">Helicopter Recon with GPS</SimpleData>
+		<SimpleData name="LOC_ACCURA">Within 200m</SimpleData>
+		<SimpleData name="ORINGINATO">GNS Science/S Cox</SimpleData>
+		<SimpleData name="src">GNS</SimpleData>
+		<SimpleData name="OBJECTID_1">1083</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>173.46147946825,-42.3474327430641</coordinates></Point>
+  </Placemark>
+</Folder>
+</Document></kml>

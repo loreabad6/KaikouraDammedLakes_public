@@ -1,13 +1,16 @@
 library(stars)
 library(dplyr)
-lakes = read_stars('../results/mapping_results-0000000000-0000000000.tif', proxy = T)
+lakes = read_stars('results/results_update/mapping_results_update-0000000000-0000000000.tif', proxy = T)
 error_matrix = function(subset){
   val_areas = st_read('validation/validation_areas.geojson', quiet = T) %>% 
     st_transform(crs = st_crs(lakes)) 
-  lakes = lakes[,,,c(2,9,13)][val_areas %>% filter(id == subset)] %>% 
+  lakes = lakes[,,,c(4,12,15)] %>% 
+    st_crop(val_areas %>% filter(id == subset)) %>% 
     st_as_stars() %>% 
     st_set_dimensions(names = c('x','y','month'))
-  pixels_lakes = lakes %>% st_apply('month', sum, na.rm = T) %>% as.data.frame()
+  # pixels_lakes = lakes %>%
+  #   st_apply(MARGIN = "month", FUN = sum, na.rm = T) %>%
+  #   as.data.frame()
   
   files = list.files('validation', pattern = 'validation_data', full.names = T)
   val = do.call(
@@ -22,7 +25,7 @@ error_matrix = function(subset){
   ) %>% st_transform(crs = st_crs(lakes)) %>% st_join(val_areas, left = F)
   
   lakes_skeleton = lakes[,,,1, drop = T] %>% 
-    dplyr::select(results = mapping_results.0000000000.0000000000.tif) %>%
+    dplyr::select(results = mapping_results_update.0000000000.0000000000.tif) %>%
     mutate(results = ifelse(results == 1, 0, results))
   val_2016 = val %>% 
     filter(id.y == subset, stringr::str_detect(year, '2016')) %>% 
@@ -35,7 +38,8 @@ error_matrix = function(subset){
     st_rasterize(template = lakes_skeleton, options = "ALL_TOUCHED=FALSE") 
   
   val = c(val_2016, val_2018, val_2019, along = 'month')
-  pixels_val = val %>% st_apply('month', sum, na.rm = T) %>% as.data.frame()
+  # errors in current stars version with na.rm
+  # pixels_val = val %>% st_apply('month', sum, na.rm = T) %>% as.data.frame()
   
   cm2016 = c(val[,,,1], lakes[,,,1], along = 3) %>% 
     as_tibble() %>% 
@@ -83,7 +87,7 @@ accuracy_assessment = function(cm){
   
   prod_acc = diag / colsums * 100
   cons_acc = diag / rowsums * 100
-  
+
   sign = binom.test(x = sum(diag),
                     n = n,
                     alternative = c("two.sided"),
@@ -107,16 +111,21 @@ accuracy_assessment = function(cm){
   dimnames(cm_ext) = list("Prediction" = colnames(cm_ext),
                                "Reference" = rownames(cm_ext))
   
+  # IOU computation
+  # IOU = true_positive / (true_positive + false_positive + false_negative).
+  iou = cm[2,2]/(cm[2,2] + cm[1,2] + cm[2,1])
+  
   actual_lake_pixels = rowsums[2]
   predicted_lake_pixels = colsums[2]
   correctly_predicted_lake_pixels = diag[2]
   class(cm_ext) = 'table'
   res = list(
-    cm_ext, pvalue, CI95, kappa, 
+    cm_ext, pvalue, CI95, kappa, iou,
     actual_lake_pixels, predicted_lake_pixels, correctly_predicted_lake_pixels
   )
   names(res) = c(
     'Accuracy Table', 'P-value', 'Conf. Interval', 'Kappa coefficient', 
+    "Intersection Over Union",
     'Actual lake pixels', 'Predicted lake pixels', 'Correctly detected lake pixels')
   res
 }
@@ -131,7 +140,8 @@ acc_results = data.frame(
   pa = formatC(sapply(acc_list, function(x) x$`Accuracy Table`[4,2]), format = 'f', digits = 2),
   ca = formatC(sapply(acc_list, function(x) x$`Accuracy Table`[2,4]), format = 'f', digits = 2),
   # oa = sapply(acc_list, function(x) x$`Accuracy Table`[4,4]),
-  kp = formatC(sapply(acc_list, function(x) x$`Kappa coefficient`), format = 'f', digits = 3),
+  # kp = formatC(sapply(acc_list, function(x) x$`Kappa coefficient`), format = 'f', digits = 3),
+  iou = formatC(sapply(acc_list, function(x) x$`Intersection Over Union`*100), format = 'f', digits = 2),
   alp = formatC(sapply(acc_list, function(x) x$`Actual lake pixels`), format = 'd', digits = 0),
   plp = formatC(sapply(acc_list, function(x) x$`Predicted lake pixels`), format = 'd', digits = 0),
   clp = formatC(sapply(acc_list, function(x) x$`Correctly detected lake pixels`), format = 'd', digits = 0)
@@ -144,9 +154,9 @@ acc_results = data.frame(
     ar = ifelse(ar == 'a0', 'Subset A', 'Subset B'),
     dt = ifelse(dt == 2016, 'December 2016', ifelse(dt == 2018, 'March 2018', 'January 2019'))
   ) %>% 
-  pivot_longer(cols = c(pa,ca,kp,alp,plp,clp), names_to = 'am') %>% 
-  mutate(am = factor(am, levels = c('alp','plp','clp','pa','ca','kp', ordered = T))) %>% 
+  pivot_longer(cols = c(pa,ca,iou,alp,plp,clp), names_to = 'am') %>% 
+  mutate(am = factor(am, levels = c('alp','plp','clp','pa','ca','iou', ordered = T))) %>% 
   pivot_wider(id_cols = c(am,ar), names_from = dt, values_from = value) %>%
   arrange(am) 
 
-save(acc_results, file = "accuracy_assessment.Rda")
+save(acc_results, file = "validation/accuracy_assessment_update.Rda")
