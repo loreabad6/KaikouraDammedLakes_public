@@ -14,7 +14,7 @@ The figure below shows an overview of the methodology followed:
 
 The main analysis was performed on Google Earth Engine (GEE), and its corresponding repository can be found [here](https://code.earthengine.google.com/?accept_repo=users/loreabad6/KaikouraDammedLakes_public). To access the code files, you will need to have a GEE account.
 
-If you would only like to see the main code, without a GEE account, please [click here](https://code.earthengine.google.com/354be2242944d820090df1eb4c68dbe9?noload=true)
+If you would only like to see the main code, without a GEE account, see the [gee-code directory](gee-code/).
 
 The resulting datasets from the analysis are archived as assets [here](https://code.earthengine.google.com/?asset=projects/ee-loreabad6/assets/Kaikoura_landslidedammedlakes_update).
 
