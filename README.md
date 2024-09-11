@@ -1,6 +1,6 @@
 # Landslide dammed-lakes detection and monitoring after the Kaikoura earthquake in New Zealand
 
-This repository centralizes the main processing steps to detect and monitor landslide-dammed lakes in NZ. It accompanies a [paper recently published in STOTEN](https://www.sciencedirect.com/science/article/pii/S0048969722004272)  This study is part of the ÖAW-funded [RiCoLa project](https://landslides-and-rivers.sbg.ac.at/).
+This repository centralizes the main processing steps to detect and monitor landslide-dammed lakes in NZ. It accompanies a [paper published in STOTEN](https://www.sciencedirect.com/science/article/pii/S0048969722004272)  This study is part of the ÖAW-funded [RiCoLa project](https://landslides-and-rivers.sbg.ac.at/).
 
 Please cite as:
 
